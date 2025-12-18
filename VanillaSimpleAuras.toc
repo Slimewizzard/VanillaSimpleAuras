@@ -1,0 +1,8 @@
+## Interface: 11200
+## Title: VanillaSimpleAuras
+## Notes: Tracks specific buffs and spell cooldowns.
+## Author: Slimewizzard
+## Version: 1.0
+## SavedVariablesPerCharacter: VanillaSimpleAurasDB
+
+VanillaSimpleAuras.lua
