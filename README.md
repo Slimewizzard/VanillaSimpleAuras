@@ -1,6 +1,8 @@
 # VanillaSimpleAuras
 
-**VanillaSimpleAuras** is a simple World of Warcraft (1.12.1) addon for tracking important buffs and spell cooldowns.
+**VanillaSimpleAuras**
+A simple World of Warcraft (1.12.1) addon for tracking important buffs and spell cooldowns.
+The concept is to allow players to easily track buffs, spells and missing consumes in a highly configurative manner. 
 
 ## Features
 
@@ -20,3 +22,4 @@
 - **Unlock Frame**: Allows you to drag the icon container to your desired location.
 - **Add Item**: Enter the name of the spell/buff and its icon texture name (e.g., `Spell_Holy_SearingLight`).
 - **Remove Item**: Click the `X` button next to an item in the list to remove it.
+
