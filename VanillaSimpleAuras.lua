@@ -19,8 +19,95 @@ local defaults = {
 }
 
 local VSA_PREDEFINED_CONSUMES = {
-    { key = "food_salad", name = "Empowering Herbal Salad", icon = "inv_misc_food_salad", buff = "spell_nature_healingway" },
-    { key = "elixir_dreamshard", name = "Dreamshard Elixir", icon = "inv_potion_113", buff = "inv_potion_113" },
+    -- Food
+    { category = "Food", key = "food_dumplings", name = "Smoked Desert Dumplings", icon = "inv_misc_food_64", buff = "spell_misc_food" },
+    { category = "Food", key = "food_squid", name = "Grilled Squid", icon = "inv_misc_fish_13", buff = "inv_gauntlets_19" },
+    { category = "Food", key = "food_nightfin", name = "Nightfin Soup", icon = "inv_drink_17", buff = "spell_nature_manaregentotem" },
+    { category = "Food", key = "food_runntum", name = "Runn Tum Tuber Surprise", icon = "inv_misc_food_63", buff = "inv_misc_organ_03" },
+    { category = "Food", key = "food_dirges", name = "Dirge's Kickin' Chimaerok Chops", icon = "inv_misc_food_65", buff = "inv_boots_plate_03" },
+    { category = "Food", key = "food_mushroom_h", name = "Hardened Mushroom", icon = "inv_mushroom_15", buff = "inv_boots_plate_03" },
+    { category = "Food", key = "food_mushroom_p", name = "Power Mushroom", icon = "inv_mushroom_14", buff = "spell_misc_food" },
+    { category = "Food", key = "food_fishe", name = "Le Fishe Au Chocolat", icon = "inv_misc_fishe_au_chocolate", buff = "spell_misc_food" },
+    { category = "Food", key = "food_berry", name = "Sweet Mountain Berry", icon = "inv_misc_food_40", buff = "inv_boots_plate_03" },
+    { category = "Food", key = "food_telabim_medley", name = "Danonzo's Tel'Abim Medley", icon = "inv_misc_food_73", buff = "spell_misc_food" },
+    { category = "Food", key = "food_telabim_surprise", name = "Danonzo's Tel'Abim Surprise", icon = "inv_misc_food_92", buff = "spell_misc_food" },
+    { category = "Food", key = "food_telabim_delight", name = "Danonzo's Tel'Abim Delight", icon = "inv_drink_21", buff = "spell_misc_food" },
+    { category = "Food", key = "food_gumbo", name = "Gurubashi Gumbo", icon = "inv_misc_food_64", buff = "inv_misc_food_73" },
+    { category = "Food", key = "food_chili", name = "Dragonbreath Chili", icon = "inv_drink_23", buff = "spell_fire_incinerate" },
+    { category = "Food", key = "food_salad", name = "Empowering Herbal Salad", icon = "inv_misc_food_salad", buff = "spell_nature_healingway" },
+
+    -- Flasks
+    { category = "Flasks", key = "flask_titans", name = "Flask of the Titans", icon = "inv_potion_62", buff = "inv_potion_62" },
+    { category = "Flasks", key = "flask_supreme", name = "Flask of Supreme Power", icon = "inv_potion_41", buff = "inv_potion_41" },
+    { category = "Flasks", key = "flask_wisdom", name = "Flask of Distilled Wisdom", icon = "inv_potion_120", buff = "inv_potion_120" },
+
+    -- Elixirs
+    { category = "Elixirs", key = "elixir_mongoose", name = "Elixir of the Mongoose", icon = "inv_potion_32", buff = "inv_potion_32" },
+    { category = "Elixirs", key = "elixir_fortitude", name = "Elixir of Fortitude", icon = "inv_potion_43", buff = "inv_potion_44" },
+    { category = "Elixirs", key = "elixir_giants", name = "Elixir of Giants", icon = "inv_potion_61", buff = "inv_potion_61" },
+    { category = "Elixirs", key = "elixir_defense", name = "Elixir of Superior Defense", icon = "inv_potion_66", buff = "inv_potion_86" },
+    { category = "Elixirs", key = "elixir_shadow", name = "Elixir of Shadow Power", icon = "inv_potion_46", buff = "inv_potion_46" },
+    { category = "Elixirs", key = "elixir_firepower", name = "Elixir of Greater Firepower", icon = "inv_potion_60", buff = "inv_potion_60" },
+    { category = "Elixirs", key = "elixir_nature", name = "Elixir of Greater Nature Power", icon = "inv_potion_106", buff = "inv_potion_106" },
+    { category = "Elixirs", key = "elixir_frost", name = "Elixir of Frost Power", icon = "inv_potion_115", buff = "inv_potion_03" },
+    { category = "Elixirs", key = "elixir_intellect", name = "Elixir of Greater Intellect", icon = "inv_potion_124", buff = "inv_potion_10" },
+    { category = "Elixirs", key = "elixir_arcane", name = "Greater Arcane Elixir", icon = "inv_potion_25", buff = "inv_potion_25" },
+    { category = "Elixirs", key = "juju_might", name = "Juju Might", icon = "inv_misc_monsterscales_07", buff = "inv_misc_monsterscales_07" },
+    { category = "Elixirs", key = "juju_power", name = "Juju Power", icon = "inv_misc_monsterscales_11", buff = "inv_misc_monsterscales_11" },
+    { category = "Elixirs", key = "juju_flurry", name = "Juju Flurry", icon = "inv_misc_monsterscales_17", buff = "inv_misc_monsterscales_17" },
+    { category = "Elixirs", key = "elixir_dreamshard", name = "Dreamshard Elixir", icon = "inv_potion_113", buff = "inv_potion_113" },
+    { category = "Elixirs", key = "elixir_mongoose_c", name = "Concoction of the Emerald Mongoose", icon = "inv_blue_gold_elixir_2", buff = "inv_blue_gold_elixir_2" },
+    { category = "Elixirs", key = "elixir_dreamwater_c", name = "Concoction of the Dreamwater", icon = "inv_green_pink_elixir_1", buff = "inv_green_pink_elixir_1" },
+    { category = "Elixirs", key = "elixir_giant_c", name = "Concoction of the Arcane Giant", icon = "inv_yellow_purple_elixir_2", buff = "inv_yellow_purple_elixir_2" },
+
+    -- Potions (Special & Combat)
+    { category = "Potions", key = "potion_mageblood", name = "Mageblood Potion", icon = "inv_potion_45", buff = "inv_potion_45" },
+    { category = "Potions", key = "potion_arthas", name = "Gift of Arthas", icon = "inv_potion_28", buff = "spell_shadow_fingerofdeath" },
+    { category = "Potions", key = "potion_firewater", name = "Winterfall Firewater", icon = "inv_potion_92", buff = "inv_potion_92" },
+    { category = "Potions", key = "potion_zanza", name = "Spirit of Zanza", icon = "inv_potion_30", buff = "inv_potion_30" },
+    { category = "Potions", key = "potion_scorpok", name = "Ground Scorpok Assay", icon = "inv_misc_dust_07", buff = "spell_nature_forceofnature" },
+    { category = "Potions", key = "potion_roids", name = "R.O.I.D.S.", icon = "inv_stone_15", buff = "spell_nature_strength" },
+    { category = "Potions", key = "potion_cortex", name = "Cerebral Cortex Compound", icon = "inv_potion_119", buff = "spell_nature_purge" },
+    { category = "Potions", key = "potion_dreamtonic", name = "Dreamtonic", icon = "inv_potion_114", buff = "inv_potion_30" },
+    { category = "Potions", key = "potion_quickness", name = "Potion of Quickness", icon = "inv_potion_08", buff = "spell_nature_invisibilty" },
+    -- Note: Mighty Rage and Herbal Tea are instant, so tracking them as buffs usually doesn't work well unless they leave a specific buff.
+    
+    -- Weapons
+    { category = "Weapons", key = "weapon_dense_main", name = "Dense Sharpening Stone (Main)", icon = "inv_stone_sharpeningstone_05", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_dense_off", name = "Dense Sharpening Stone (Off)", icon = "inv_stone_sharpeningstone_05", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_ele_main", name = "Elemental Sharpe. Stone (Main)", icon = "inv_stone_02", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_ele_off", name = "Elemental Sharpe. Stone (Off)", icon = "inv_stone_02", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_mana_main", name = "Brilliant Mana Oil", icon = "inv_potion_100", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_wizard_main", name = "Brilliant Wizard Oil", icon = "inv_potion_105", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_blessed_main", name = "Blessed Weapon Coating (Main)", icon = "inv_potion_95", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_blessed_off", name = "Blessed Weapon Coating (Off)", icon = "inv_potion_95", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_shadow_main", name = "Shadowoil (Main)", icon = "inv_potion_106", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_shadow_off", name = "Shadowoil (Off)", icon = "inv_potion_106", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_deadly_main", name = "Deadly Poison (Main)", icon = "ability_rogue_dualweild", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_deadly_off", name = "Deadly Poison (Off)", icon = "ability_rogue_dualweild", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_instant_main", name = "Instant Poison (Main)", icon = "ability_poisons", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_instant_off", name = "Instant Poison (Off)", icon = "ability_poisons", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_consecrated_main", name = "Consecrated Stone (Main)", icon = "inv_stone_sharpeningstone_02", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_consecrated_off", name = "Consecrated Stone (Off)", icon = "inv_stone_sharpeningstone_02", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_bwizard_main", name = "Blessed Wizard Oil", icon = "inv_potion_138", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_frost_main", name = "Frost Oil (Main)", icon = "inv_potion_130", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_frost_off", name = "Frost Oil (Off)", icon = "inv_potion_130", isWeaponEnchant = true, slot = "offhand" },
+
+    -- Misc (Class Buffs & Alcohol & Other)
+    { category = "Misc", key = "misc_fort", name = "Power Word: Fortitude", icon = "spell_holy_wordfortitude", buff = "spell_holy_wordfortitude" },
+    { category = "Misc", key = "misc_spirit", name = "Divine Spirit", icon = "spell_holy_divinespirit", buff = "spell_holy_divinespirit" },
+    { category = "Misc", key = "misc_int", name = "Arcane Intellect", icon = "spell_holy_magicalsentry", buff = "spell_holy_magicalsentry" },
+    { category = "Misc", key = "misc_motw", name = "Mark of the Wild", icon = "spell_nature_regeneration", buff = "spell_nature_regeneration" },
+    { category = "Misc", key = "misc_salv", name = "Blessing of Salvation", icon = "spell_holy_sealofsalvation", buff = "spell_holy_sealofsalvation" },
+    { category = "Misc", key = "misc_might", name = "Blessing of Might", icon = "spell_holy_fistofjustice", buff = "spell_holy_fistofjustice" },
+    { category = "Misc", key = "misc_wis", name = "Blessing of Wisdom", icon = "spell_holy_sealofwisdom", buff = "spell_holy_sealofwisdom" },
+    { category = "Misc", key = "misc_kings", name = "Blessing of Kings", icon = "spell_magic_magearmor", buff = "spell_magic_magearmor" },
+    { category = "Misc", key = "misc_light", name = "Blessing of Light", icon = "spell_holy_prayerofhealing02", buff = "spell_holy_prayerofhealing02" },
+    { category = "Misc", key = "misc_rumsey", name = "Rumsey Rum Black Label", icon = "inv_drink_04", buff = "inv_drink_04" },
+    { category = "Misc", key = "misc_merlot", name = "Medivh's Merlot", icon = "inv_drink_waterskin_05", buff = "inv_drink_04" },
+    { category = "Misc", key = "misc_merlot_blue", name = "Medivh's Merlot Blue", icon = "inv_drink_waterskin_01", buff = "inv_drink_19" },
+    { category = "Misc", key = "misc_runn", name = "Runn Tum Tuber", icon = "inv_misc_food_02", buff = "inv_misc_food_02" },
+    { category = "Misc", key = "misc_ony", name = "Onyxia Buff", icon = "inv_misc_head_dragon_01", buff = "inv_misc_head_dragon_01" },
 }
 
 local VSA_Frame = CreateFrame("Frame") -- Event handler frame
@@ -151,17 +238,29 @@ local function UpdateConsumes()
         if VanillaSimpleAurasDB.consumes[item.key] then
             -- Logic: Check if player has buff. If NOT, show icon.
             local found = false
-            local k = 1
-            while true do
-                local texture = UnitBuff("player", k)
-                if not texture then break end
+            
+            if item.isWeaponEnchant then
+                local hasMainHandEnchant, mainHandExpiration, mainHandCharges, hasOffHandEnchant, offHandExpiration, offHandCharges = GetWeaponEnchantInfo()
                 
-                -- Check texture match
-                if string.find(string.lower(texture), string.lower(item.buff)) then
+                if item.slot == "mainhand" and hasMainHandEnchant then
                     found = true
-                    break
+                elseif item.slot == "offhand" and hasOffHandEnchant then
+                    found = true
                 end
-                k = k + 1
+                
+            else
+                local k = 1
+                while true do
+                    local texture = UnitBuff("player", k)
+                    if not texture then break end
+                    
+                    -- Check texture match
+                    if string.find(string.lower(texture), string.lower(item.buff)) then
+                        found = true
+                        break
+                    end
+                    k = k + 1
+                end
             end
             
             if not found then
@@ -561,10 +660,63 @@ function VSA_UpdateOptionsList()
 end
 
 -- Side Window for Consumes
+local function VSA_RefreshConsumeList(category)
+    if not VSA_ConsumeOptionsFrame then return end
+    local f = VSA_ConsumeOptionsFrame
+    
+    -- Hide all existing checks
+    if f.checks then
+        for _, cb in pairs(f.checks) do cb:Hide() end
+    else
+        f.checks = {}
+    end
+    
+    -- Filter items
+    local yVal = -10
+    local count = 0
+    for i, item in ipairs(VSA_PREDEFINED_CONSUMES) do
+        if item.category == category then
+            count = count + 1
+            local cb = f.checks[count]
+            if not cb then
+                cb = CreateFrame("CheckButton", "VSA_ConsumeCheck"..count, f.content, "OptionsCheckButtonTemplate")
+                cb:SetWidth(24)
+                cb:SetHeight(24)
+                f.checks[count] = cb
+            end
+            
+            cb:ClearAllPoints()
+            cb:SetPoint("TOPLEFT", f.content, "TOPLEFT", 10, yVal)
+            
+            cb.label = getglobal(cb:GetName().."Text")
+            cb.label:SetText(item.name)
+            
+            cb:SetChecked(VanillaSimpleAurasDB.consumes[item.key])
+            cb:SetScript("OnClick", function()
+                 VanillaSimpleAurasDB.consumes[item.key] = this:GetChecked() and true or nil
+                 UpdateConsumes()
+            end)
+            
+            -- Store item key for closure-like access if needed, but here we just used item.key in the script
+            -- Wait, Lua 5.0 loop variable closure issue? 
+            -- Yes, 'item' will be the last one if not careful in 5.0? No, 5.0 'for' loops are fresh scope per iteration? 
+            -- Actually in 5.0 it might be shared. Let's start safe.
+            cb.itemKey = item.key
+            cb:SetScript("OnClick", function()
+                 VanillaSimpleAurasDB.consumes[this.itemKey] = this:GetChecked() and true or nil
+                 UpdateConsumes()
+            end)
+
+            cb:Show()
+            yVal = yVal - 26
+        end
+    end
+end
+
 local function CreateConsumeOptionsFrame()
     local f = CreateFrame("Frame", "VanillaSimpleAurasConsumeOptions", UIParent)
-    f:SetWidth(250)
-    f:SetHeight(300)
+    f:SetWidth(400) -- Wider for tabs
+    f:SetHeight(350)
     f:SetPoint("TOPLEFT", VSA_OptionsFrame, "TOPRIGHT", 0, 0)
     f:SetBackdrop({
         bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
@@ -572,39 +724,46 @@ local function CreateConsumeOptionsFrame()
         tile = true, tileSize = 32, edgeSize = 32,
         insets = { left = 11, right = 12, top = 12, bottom = 11 }
     })
-    f:Hide() -- Hide immediately
+    f:Hide()
     
     local title = f:CreateFontString(nil, "ARTWORK", "GameFontNormal")
     title:SetPoint("TOP", f, "TOP", 0, -20)
     title:SetText("Consume List")
     
-    -- Close
     local close = CreateFrame("Button", "VSA_ConsumeClose", f, "UIPanelCloseButton")
     close:SetPoint("TOPRIGHT", f, "TOPRIGHT", -5, -5)
     
-    -- List container
+    -- Category Buttons (Left side)
+    local categories = {"Elixirs", "Flasks", "Food", "Potions", "Weapons", "World", "Misc"}
     local yVal = -50
-    for i, item in ipairs(VSA_PREDEFINED_CONSUMES) do
-        local thisItem = item -- Capture for closure
-        local cb = CreateFrame("CheckButton", "VSA_ConsumeCheck"..i, f, "OptionsCheckButtonTemplate")
-        cb:SetWidth(24)
-        cb:SetHeight(24)
-        cb:SetPoint("TOPLEFT", f, "TOPLEFT", 20, yVal)
-        
-        cb.label = cb:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-        cb.label:SetPoint("LEFT", cb, "RIGHT", 5, 0)
-        cb.label:SetText(thisItem.name)
-        
-        -- Init
-        cb:SetChecked(VanillaSimpleAurasDB.consumes[thisItem.key])
-        
-        cb:SetScript("OnClick", function()
-             VanillaSimpleAurasDB.consumes[thisItem.key] = this:GetChecked() and true or nil
-             UpdateConsumes()
+    f.catButtons = {}
+    
+    for i, cat in ipairs(categories) do
+        local btn = CreateFrame("Button", "VSA_CatBtn"..i, f, "UIPanelButtonTemplate")
+        btn:SetWidth(80)
+        btn:SetHeight(24)
+        btn:SetPoint("TOPLEFT", f, "TOPLEFT", 15, yVal)
+        btn:SetText(cat)
+        btn.category = cat -- Store on button to avoid closure issues
+        btn:SetScript("OnClick", function()
+            VSA_RefreshConsumeList(this.category)
         end)
-        
-        yVal = yVal - 30
+        f.catButtons[i] = btn
+        yVal = yVal - 28
     end
+    
+    -- Content Area (Right side)
+    local content = CreateFrame("Frame", nil, f)
+    content:SetWidth(270)
+    content:SetHeight(250)
+    content:SetPoint("TOPLEFT", f, "TOPLEFT", 100, -50)
+    -- content:SetBackdrop(...) -- Optional visual separation
+    f.content = content
+    
+    -- Default selection
+    f:SetScript("OnShow", function()
+        VSA_RefreshConsumeList("Elixirs")
+    end)
     
     -- Consume Interval Slider
     local slider = CreateFrame("Slider", "VanillaSimpleAurasConsumeSlider", f, "OptionsSliderTemplate")
