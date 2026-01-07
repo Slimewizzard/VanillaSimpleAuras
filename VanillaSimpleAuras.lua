@@ -11,11 +11,9 @@ local defaults = {
     consumes = {}, -- key -> bool
     updateInterval = 0.2,
     consumeInterval = 5.0,
-    items = {
-        -- Example structure:
-        -- { type = "SPELL", name = "Holy Shock", icon = "Spell_Holy_SearingLight", enabled = true },
-        -- { type = "BUFF", name = "Judgement", icon = "Ability_Paladin_JudgementBlue", enabled = true },
-    }
+    items = {},
+    minimapPos = 45,
+    showMinimapButton = true
 }
 
 local VSA_PREDEFINED_CONSUMES = {
@@ -785,6 +783,78 @@ local function CreateConsumeOptionsFrame()
     return f
 end
 
+--------------------------------------------------------------------------------
+-- Minimap Button
+--------------------------------------------------------------------------------
+local function VSA_UpdateMinimapButtonPos()
+    local angle = VanillaSimpleAurasDB.minimapPos or 45
+    local x = math.cos(math.rad(angle)) * 80
+    local y = math.sin(math.rad(angle)) * 80
+    VSA_MinimapButton:SetPoint("CENTER", Minimap, "CENTER", x, y)
+end
+
+local function CreateMinimapButton()
+    local f = CreateFrame("Button", "VSA_MinimapButton", Minimap)
+    f:SetWidth(31)
+    f:SetHeight(31)
+    f:SetFrameStrata("LOW")
+    f:SetToplevel(true)
+    f:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
+    
+    local icon = f:CreateTexture(nil, "BACKGROUND")
+    icon:SetWidth(20)
+    icon:SetHeight(20)
+    icon:SetPoint("CENTER", f, "CENTER", 0, 0)
+    icon:SetTexture("Interface\\AddOns\\VanillaSimpleAuras\\vsabig")
+    f.icon = icon
+    
+    local border = f:CreateTexture(nil, "OVERLAY")
+    border:SetWidth(53)
+    border:SetHeight(53)
+    border:SetPoint("TOPLEFT", f, "TOPLEFT", -1, 1)
+    border:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
+    
+    f:RegisterForClicks("LeftButtonUp")
+    f:SetScript("OnClick", function()
+        SlashCmdList["VANILLASIMPLEAURAS"]("")
+    end)
+    
+    f:SetScript("OnEnter", function()
+        GameTooltip:SetOwner(this, "ANCHOR_LEFT")
+        GameTooltip:SetText("VanillaSimpleAuras")
+        GameTooltip:AddLine("Left-click to open options.", 1, 1, 1)
+        GameTooltip:AddLine("Drag to move.", 1, 1, 1)
+        GameTooltip:Show()
+    end)
+    f:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
+    
+    f:RegisterForDrag("LeftButton")
+    f:SetScript("OnDragStart", function()
+        this:SetScript("OnUpdate", function()
+            local cx, cy = GetCursorPosition()
+            local mx, my = Minimap:GetCenter()
+            local scale = Minimap:GetEffectiveScale()
+            local x = cx / scale - mx
+            local y = cy / scale - my
+            local angle = math.deg(math.atan2(y, x))
+            VanillaSimpleAurasDB.minimapPos = angle
+            VSA_UpdateMinimapButtonPos()
+        end)
+    end)
+    f:SetScript("OnDragStop", function()
+        this:SetScript("OnUpdate", nil)
+    end)
+    
+    VSA_UpdateMinimapButtonPos()
+    if VanillaSimpleAurasDB.showMinimapButton then
+        f:Show()
+    else
+        f:Hide()
+    end
+end
+
 local function VSA_Initialize()
     if VSA_OptionsFrame then return end -- Already initialized
     
@@ -795,6 +865,7 @@ local function VSA_Initialize()
     VSA_ConsumeFrame = CreateConsumeFrame()
     VSA_OptionsFrame = CreateOptionsFrame()
     VSA_ConsumeOptionsFrame = CreateConsumeOptionsFrame()
+    CreateMinimapButton()
     
     -- Start loop
     VSA_Frame:SetScript("OnUpdate", function()
