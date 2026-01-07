@@ -661,6 +661,7 @@ end
 local function VSA_RefreshConsumeList(category)
     if not VSA_ConsumeOptionsFrame then return end
     local f = VSA_ConsumeOptionsFrame
+    f.currentCategory = category
     
     -- Hide all existing checks
     if f.checks then
@@ -670,35 +671,26 @@ local function VSA_RefreshConsumeList(category)
     end
     
     -- Filter items
-    local yVal = -10
+    local yVal = -5
     local count = 0
     for i, item in ipairs(VSA_PREDEFINED_CONSUMES) do
         if item.category == category then
             count = count + 1
             local cb = f.checks[count]
             if not cb then
-                cb = CreateFrame("CheckButton", "VSA_ConsumeCheck"..count, f.content, "OptionsCheckButtonTemplate")
+                cb = CreateFrame("CheckButton", "VSA_ConsumeCheck"..count, f.scrollChild, "OptionsCheckButtonTemplate")
                 cb:SetWidth(24)
                 cb:SetHeight(24)
                 f.checks[count] = cb
             end
             
             cb:ClearAllPoints()
-            cb:SetPoint("TOPLEFT", f.content, "TOPLEFT", 10, yVal)
+            cb:SetPoint("TOPLEFT", f.scrollChild, "TOPLEFT", 5, yVal)
             
             cb.label = getglobal(cb:GetName().."Text")
             cb.label:SetText(item.name)
             
             cb:SetChecked(VanillaSimpleAurasDB.consumes[item.key])
-            cb:SetScript("OnClick", function()
-                 VanillaSimpleAurasDB.consumes[item.key] = this:GetChecked() and true or nil
-                 UpdateConsumes()
-            end)
-            
-            -- Store item key for closure-like access if needed, but here we just used item.key in the script
-            -- Wait, Lua 5.0 loop variable closure issue? 
-            -- Yes, 'item' will be the last one if not careful in 5.0? No, 5.0 'for' loops are fresh scope per iteration? 
-            -- Actually in 5.0 it might be shared. Let's start safe.
             cb.itemKey = item.key
             cb:SetScript("OnClick", function()
                  VanillaSimpleAurasDB.consumes[this.itemKey] = this:GetChecked() and true or nil
@@ -709,6 +701,9 @@ local function VSA_RefreshConsumeList(category)
             yVal = yVal - 26
         end
     end
+    
+    -- Set ScrollChild height
+    f.scrollChild:SetHeight(math.abs(yVal) + 10)
 end
 
 local function CreateConsumeOptionsFrame()
@@ -750,13 +745,25 @@ local function CreateConsumeOptionsFrame()
         yVal = yVal - 28
     end
     
-    -- Content Area (Right side)
-    local content = CreateFrame("Frame", nil, f)
-    content:SetWidth(270)
-    content:SetHeight(250)
-    content:SetPoint("TOPLEFT", f, "TOPLEFT", 100, -50)
-    -- content:SetBackdrop(...) -- Optional visual separation
-    f.content = content
+    -- Content ScrollFrame (Right side)
+    local scrollFrame = CreateFrame("ScrollFrame", "VSA_ConsumeScrollFrame", f, "UIPanelScrollFrameTemplate")
+    scrollFrame:SetWidth(240)
+    scrollFrame:SetHeight(230)
+    scrollFrame:SetPoint("TOPLEFT", f, "TOPLEFT", 110, -60)
+    
+    local scrollChild = CreateFrame("Frame", "VSA_ConsumeScrollChild", scrollFrame)
+    scrollChild:SetWidth(230)
+    scrollChild:SetHeight(230)
+    scrollFrame:SetScrollChild(scrollChild)
+    
+    f.scrollFrame = scrollFrame
+    f.scrollChild = scrollChild
+    
+    -- BG for content
+    local contentBG = f:CreateTexture(nil, "BACKGROUND")
+    contentBG:SetPoint("TOPLEFT", scrollFrame, "TOPLEFT", -5, 5)
+    contentBG:SetPoint("BOTTOMRIGHT", scrollFrame, "BOTTOMRIGHT", 25, -5)
+    contentBG:SetTexture(0, 0, 0, 0.3)
     
     -- Default selection
     f:SetScript("OnShow", function()
