@@ -1,4 +1,4 @@
-## Interface: 11200
+## Interface: 11505
 ## Title: VanillaSimpleAuras
 ## Notes: Tracks specific buffs and spell cooldowns.
 ## Author: Slimewizzard

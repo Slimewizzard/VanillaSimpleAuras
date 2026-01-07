@@ -25,89 +25,63 @@ local VSA_PREDEFINED_CONSUMES = {
     { category = "Food", key = "food_nightfin", name = "Nightfin Soup", icon = "inv_drink_17", buff = "spell_nature_manaregentotem" },
     { category = "Food", key = "food_runntum", name = "Runn Tum Tuber Surprise", icon = "inv_misc_food_63", buff = "inv_misc_organ_03" },
     { category = "Food", key = "food_dirges", name = "Dirge's Kickin' Chimaerok Chops", icon = "inv_misc_food_65", buff = "inv_boots_plate_03" },
-    { category = "Food", key = "food_mushroom_h", name = "Hardened Mushroom", icon = "inv_mushroom_15", buff = "inv_boots_plate_03" },
-    { category = "Food", key = "food_mushroom_p", name = "Power Mushroom", icon = "inv_mushroom_14", buff = "spell_misc_food" },
-    { category = "Food", key = "food_fishe", name = "Le Fishe Au Chocolat", icon = "inv_misc_fishe_au_chocolate", buff = "spell_misc_food" },
-    { category = "Food", key = "food_berry", name = "Sweet Mountain Berry", icon = "inv_misc_food_40", buff = "inv_boots_plate_03" },
-    { category = "Food", key = "food_telabim_medley", name = "Danonzo's Tel'Abim Medley", icon = "inv_misc_food_73", buff = "spell_misc_food" },
-    { category = "Food", key = "food_telabim_surprise", name = "Danonzo's Tel'Abim Surprise", icon = "inv_misc_food_92", buff = "spell_misc_food" },
-    { category = "Food", key = "food_telabim_delight", name = "Danonzo's Tel'Abim Delight", icon = "inv_drink_21", buff = "spell_misc_food" },
-    { category = "Food", key = "food_gumbo", name = "Gurubashi Gumbo", icon = "inv_misc_food_64", buff = "inv_misc_food_73" },
+    { category = "Food", key = "food_sagefish", name = "Sagefish Delight", icon = "inv_misc_fish_16", buff = "inv_misc_fish_16" },
+    { category = "Food", key = "food_salmon", name = "Poached Sunscale Salmon", icon = "inv_misc_fish_15", buff = "inv_misc_fish_15" },
+    { category = "Food", key = "food_sunfruit", name = "Blessed Sunfruit", icon = "inv_misc_food_41", buff = "inv_misc_food_41" },
+    { category = "Food", key = "food_sunfruit_j", name = "Blessed Sunfruit Juice", icon = "inv_drink_13", buff = "inv_drink_13" },
     { category = "Food", key = "food_chili", name = "Dragonbreath Chili", icon = "inv_drink_23", buff = "spell_fire_incinerate" },
-    { category = "Food", key = "food_salad", name = "Empowering Herbal Salad", icon = "inv_misc_food_salad", buff = "spell_nature_healingway" },
+    { category = "Food", key = "food_fruit_sorbet", name = "Fruit Sorbet", icon = "inv_misc_food_56", buff = "spell_misc_food" },
+    { category = "Food", key = "food_monster_omelet", name = "Monster Omelet", icon = "inv_misc_food_51", buff = "spell_misc_food" },
 
     -- Flasks
     { category = "Flasks", key = "flask_titans", name = "Flask of the Titans", icon = "inv_potion_62", buff = "inv_potion_62" },
     { category = "Flasks", key = "flask_supreme", name = "Flask of Supreme Power", icon = "inv_potion_41", buff = "inv_potion_41" },
     { category = "Flasks", key = "flask_wisdom", name = "Flask of Distilled Wisdom", icon = "inv_potion_120", buff = "inv_potion_120" },
+    { category = "Flasks", key = "flask_chromatic", name = "Flask of Chromatic Resistance", icon = "inv_potion_63", buff = "inv_potion_63" },
+    { category = "Flasks", key = "flask_petri", name = "Flask of Petrification", icon = "inv_potion_01", buff = "spell_shadow_teleport" },
 
     -- Elixirs
     { category = "Elixirs", key = "elixir_mongoose", name = "Elixir of the Mongoose", icon = "inv_potion_32", buff = "inv_potion_32" },
-    { category = "Elixirs", key = "elixir_fortitude", name = "Elixir of Fortitude", icon = "inv_potion_43", buff = "inv_potion_44" },
+    { category = "Elixirs", key = "elixir_greater_agi", name = "Elixir of Greater Agility", icon = "inv_potion_94", buff = "inv_potion_94" },
+    { category = "Elixirs", key = "elixir_brute_force", name = "Elixir of Brute Force", icon = "inv_potion_79", buff = "inv_potion_79" },
     { category = "Elixirs", key = "elixir_giants", name = "Elixir of Giants", icon = "inv_potion_61", buff = "inv_potion_61" },
+    { category = "Elixirs", key = "elixir_fortitude", name = "Elixir of Fortitude", icon = "inv_potion_43", buff = "inv_potion_44" },
     { category = "Elixirs", key = "elixir_defense", name = "Elixir of Superior Defense", icon = "inv_potion_66", buff = "inv_potion_86" },
     { category = "Elixirs", key = "elixir_shadow", name = "Elixir of Shadow Power", icon = "inv_potion_46", buff = "inv_potion_46" },
     { category = "Elixirs", key = "elixir_firepower", name = "Elixir of Greater Firepower", icon = "inv_potion_60", buff = "inv_potion_60" },
-    { category = "Elixirs", key = "elixir_nature", name = "Elixir of Greater Nature Power", icon = "inv_potion_106", buff = "inv_potion_106" },
     { category = "Elixirs", key = "elixir_frost", name = "Elixir of Frost Power", icon = "inv_potion_115", buff = "inv_potion_03" },
-    { category = "Elixirs", key = "elixir_intellect", name = "Elixir of Greater Intellect", icon = "inv_potion_124", buff = "inv_potion_10" },
     { category = "Elixirs", key = "elixir_arcane", name = "Greater Arcane Elixir", icon = "inv_potion_25", buff = "inv_potion_25" },
+    { category = "Elixirs", key = "elixir_sages", name = "Elixir of the Sages", icon = "inv_potion_78", buff = "inv_potion_78" },
     { category = "Elixirs", key = "juju_might", name = "Juju Might", icon = "inv_misc_monsterscales_07", buff = "inv_misc_monsterscales_07" },
     { category = "Elixirs", key = "juju_power", name = "Juju Power", icon = "inv_misc_monsterscales_11", buff = "inv_misc_monsterscales_11" },
     { category = "Elixirs", key = "juju_flurry", name = "Juju Flurry", icon = "inv_misc_monsterscales_17", buff = "inv_misc_monsterscales_17" },
-    { category = "Elixirs", key = "elixir_dreamshard", name = "Dreamshard Elixir", icon = "inv_potion_113", buff = "inv_potion_113" },
-    { category = "Elixirs", key = "elixir_mongoose_c", name = "Concoction of the Emerald Mongoose", icon = "inv_blue_gold_elixir_2", buff = "inv_blue_gold_elixir_2" },
-    { category = "Elixirs", key = "elixir_dreamwater_c", name = "Concoction of the Dreamwater", icon = "inv_green_pink_elixir_1", buff = "inv_green_pink_elixir_1" },
-    { category = "Elixirs", key = "elixir_giant_c", name = "Concoction of the Arcane Giant", icon = "inv_yellow_purple_elixir_2", buff = "inv_yellow_purple_elixir_2" },
 
-    -- Potions (Special & Combat)
+    -- Potions (Buff-giving)
     { category = "Potions", key = "potion_mageblood", name = "Mageblood Potion", icon = "inv_potion_45", buff = "inv_potion_45" },
-    { category = "Potions", key = "potion_arthas", name = "Gift of Arthas", icon = "inv_potion_28", buff = "spell_shadow_fingerofdeath" },
+    { category = "Potions", key = "potion_stoneshield", name = "Greater Stoneshield Potion", icon = "inv_potion_69", buff = "inv_potion_69" },
     { category = "Potions", key = "potion_firewater", name = "Winterfall Firewater", icon = "inv_potion_92", buff = "inv_potion_92" },
     { category = "Potions", key = "potion_zanza", name = "Spirit of Zanza", icon = "inv_potion_30", buff = "inv_potion_30" },
-    { category = "Potions", key = "potion_scorpok", name = "Ground Scorpok Assay", icon = "inv_misc_dust_07", buff = "spell_nature_forceofnature" },
-    { category = "Potions", key = "potion_roids", name = "R.O.I.D.S.", icon = "inv_stone_15", buff = "spell_nature_strength" },
-    { category = "Potions", key = "potion_cortex", name = "Cerebral Cortex Compound", icon = "inv_potion_119", buff = "spell_nature_purge" },
-    { category = "Potions", key = "potion_dreamtonic", name = "Dreamtonic", icon = "inv_potion_114", buff = "inv_potion_30" },
-    { category = "Potions", key = "potion_quickness", name = "Potion of Quickness", icon = "inv_potion_08", buff = "spell_nature_invisibilty" },
-    -- Note: Mighty Rage and Herbal Tea are instant, so tracking them as buffs usually doesn't work well unless they leave a specific buff.
-    
+    { category = "Potions", key = "potion_fap", name = "Free Action Potion", icon = "inv_potion_04", buff = "inv_potion_04" },
+    { category = "Potions", key = "potion_lip", name = "Limited Invulnerability Potion", icon = "inv_potion_62", buff = "inv_potion_62" },
+
     -- Weapons
-    { category = "Weapons", key = "weapon_dense_main", name = "Dense Sharpening Stone (Main)", icon = "inv_stone_sharpeningstone_05", isWeaponEnchant = true, slot = "mainhand" },
-    { category = "Weapons", key = "weapon_dense_off", name = "Dense Sharpening Stone (Off)", icon = "inv_stone_sharpeningstone_05", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_wizard_brilliant", name = "Brilliant Wizard Oil", icon = "inv_potion_105", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_mana_brilliant", name = "Brilliant Mana Oil", icon = "inv_potion_100", isWeaponEnchant = true, slot = "mainhand" },
     { category = "Weapons", key = "weapon_ele_main", name = "Elemental Sharpe. Stone (Main)", icon = "inv_stone_02", isWeaponEnchant = true, slot = "mainhand" },
     { category = "Weapons", key = "weapon_ele_off", name = "Elemental Sharpe. Stone (Off)", icon = "inv_stone_02", isWeaponEnchant = true, slot = "offhand" },
-    { category = "Weapons", key = "weapon_mana_main", name = "Brilliant Mana Oil", icon = "inv_potion_100", isWeaponEnchant = true, slot = "mainhand" },
-    { category = "Weapons", key = "weapon_wizard_main", name = "Brilliant Wizard Oil", icon = "inv_potion_105", isWeaponEnchant = true, slot = "mainhand" },
-    { category = "Weapons", key = "weapon_blessed_main", name = "Blessed Weapon Coating (Main)", icon = "inv_potion_95", isWeaponEnchant = true, slot = "mainhand" },
-    { category = "Weapons", key = "weapon_blessed_off", name = "Blessed Weapon Coating (Off)", icon = "inv_potion_95", isWeaponEnchant = true, slot = "offhand" },
-    { category = "Weapons", key = "weapon_shadow_main", name = "Shadowoil (Main)", icon = "inv_potion_106", isWeaponEnchant = true, slot = "mainhand" },
-    { category = "Weapons", key = "weapon_shadow_off", name = "Shadowoil (Off)", icon = "inv_potion_106", isWeaponEnchant = true, slot = "offhand" },
-    { category = "Weapons", key = "weapon_deadly_main", name = "Deadly Poison (Main)", icon = "ability_rogue_dualweild", isWeaponEnchant = true, slot = "mainhand" },
-    { category = "Weapons", key = "weapon_deadly_off", name = "Deadly Poison (Off)", icon = "ability_rogue_dualweild", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_dense_main", name = "Dense Sharpening Stone (Main)", icon = "inv_stone_sharpeningstone_05", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_dense_off", name = "Dense Sharpening Stone (Off)", icon = "inv_stone_sharpeningstone_05", isWeaponEnchant = true, slot = "offhand" },
     { category = "Weapons", key = "weapon_instant_main", name = "Instant Poison (Main)", icon = "ability_poisons", isWeaponEnchant = true, slot = "mainhand" },
     { category = "Weapons", key = "weapon_instant_off", name = "Instant Poison (Off)", icon = "ability_poisons", isWeaponEnchant = true, slot = "offhand" },
-    { category = "Weapons", key = "weapon_consecrated_main", name = "Consecrated Stone (Main)", icon = "inv_stone_sharpeningstone_02", isWeaponEnchant = true, slot = "mainhand" },
-    { category = "Weapons", key = "weapon_consecrated_off", name = "Consecrated Stone (Off)", icon = "inv_stone_sharpeningstone_02", isWeaponEnchant = true, slot = "offhand" },
-    { category = "Weapons", key = "weapon_bwizard_main", name = "Blessed Wizard Oil", icon = "inv_potion_138", isWeaponEnchant = true, slot = "mainhand" },
-    { category = "Weapons", key = "weapon_frost_main", name = "Frost Oil (Main)", icon = "inv_potion_130", isWeaponEnchant = true, slot = "mainhand" },
-    { category = "Weapons", key = "weapon_frost_off", name = "Frost Oil (Off)", icon = "inv_potion_130", isWeaponEnchant = true, slot = "offhand" },
 
-    -- Misc (Class Buffs & Alcohol & Other)
-    { category = "Misc", key = "misc_fort", name = "Power Word: Fortitude", icon = "spell_holy_wordfortitude", buff = "spell_holy_wordfortitude" },
-    { category = "Misc", key = "misc_spirit", name = "Divine Spirit", icon = "spell_holy_divinespirit", buff = "spell_holy_divinespirit" },
-    { category = "Misc", key = "misc_int", name = "Arcane Intellect", icon = "spell_holy_magicalsentry", buff = "spell_holy_magicalsentry" },
-    { category = "Misc", key = "misc_motw", name = "Mark of the Wild", icon = "spell_nature_regeneration", buff = "spell_nature_regeneration" },
-    { category = "Misc", key = "misc_salv", name = "Blessing of Salvation", icon = "spell_holy_sealofsalvation", buff = "spell_holy_sealofsalvation" },
-    { category = "Misc", key = "misc_might", name = "Blessing of Might", icon = "spell_holy_fistofjustice", buff = "spell_holy_fistofjustice" },
-    { category = "Misc", key = "misc_wis", name = "Blessing of Wisdom", icon = "spell_holy_sealofwisdom", buff = "spell_holy_sealofwisdom" },
-    { category = "Misc", key = "misc_kings", name = "Blessing of Kings", icon = "spell_magic_magearmor", buff = "spell_magic_magearmor" },
-    { category = "Misc", key = "misc_light", name = "Blessing of Light", icon = "spell_holy_prayerofhealing02", buff = "spell_holy_prayerofhealing02" },
-    { category = "Misc", key = "misc_rumsey", name = "Rumsey Rum Black Label", icon = "inv_drink_04", buff = "inv_drink_04" },
-    { category = "Misc", key = "misc_merlot", name = "Medivh's Merlot", icon = "inv_drink_waterskin_05", buff = "inv_drink_04" },
-    { category = "Misc", key = "misc_merlot_blue", name = "Medivh's Merlot Blue", icon = "inv_drink_waterskin_01", buff = "inv_drink_19" },
-    { category = "Misc", key = "misc_runn", name = "Runn Tum Tuber", icon = "inv_misc_food_02", buff = "inv_misc_food_02" },
-    { category = "Misc", key = "misc_ony", name = "Onyxia Buff", icon = "inv_misc_head_dragon_01", buff = "inv_misc_head_dragon_01" },
+    -- World Buffs
+    { category = "World", key = "wb_ony", name = "Rallying Cry (Ony/Nef)", icon = "inv_misc_head_dragon_01", buff = "inv_misc_head_dragon_01" },
+    { category = "World", key = "wb_zandalar", name = "Spirit of Zandalar", icon = "ability_creature_hardenedhide", buff = "ability_creature_hardenedhide" },
+    { category = "World", key = "wb_wcb", name = "Warchief's Blessing", icon = "spell_arcane_teleportdestardub", buff = "spell_arcane_teleportdestardub" },
+    { category = "World", key = "wb_songflower", name = "Songflower Serenade", icon = "spell_holy_mindvision", buff = "spell_holy_mindvision" },
+    { category = "World", key = "wb_dmt_stamina", name = "Fengus' Ferocity (DMT Str)", icon = "spell_nature_undyingstrength", buff = "spell_nature_undyingstrength" },
+    { category = "World", key = "wb_dmt_crit", name = "Slip'kik's Savvy (DMT Crit)", icon = "spell_holy_lesserheal01", buff = "spell_holy_lesserheal01" },
+    { category = "World", key = "wb_dmt_hp", name = "Mol'dar's Moxie (DMT Stam)", icon = "spell_holy_prayeroffortitude", buff = "spell_holy_prayeroffortitude" },
 }
 
 local VSA_Frame = CreateFrame("Frame") -- Event handler frame
@@ -136,6 +110,19 @@ local function CopyDefaults(src, dst)
         elseif dst[k] == nil then
             dst[k] = v
         end
+    end
+end
+
+-- Compatibility helper for UnitBuff
+local function GetBuffTexture(unit, index)
+    local arg1, arg2 = UnitBuff(unit, index)
+    if not arg1 then return nil end
+    if type(arg2) == "string" or type(arg2) == "number" then
+        -- Modern WoW (1.15+) returns name, texture, ...
+        return arg2
+    else
+        -- Vanilla (1.12) returns texture
+        return arg1
     end
 end
 
@@ -177,23 +164,19 @@ local function CheckCondition(item)
 
     elseif item.type == "BUFF" then
         -- Check if player has buff with matching icon
-        -- Use GetPlayerBuff loop to access stack counts
-        local i = 0
+        local i = 1
         while true do
-            local buffIndex = GetPlayerBuff(i, "HELPFUL")
-            if buffIndex == -1 then break end
+            local texture = GetBuffTexture("player", i)
+            if not texture then break end
             
-            local texture = GetPlayerBuffTexture(buffIndex)
+            -- User input might be "Ability_Paladin_JudgementBlue" or "Interface\\Icons\\Ability..."
+            local normTexture = string.lower(texture)
+            local searchIcon = string.lower(item.icon)
             
-            if texture then
-                -- User input might be "Ability_Paladin_JudgementBlue" or "Interface\\Icons\\Ability..."
-                local normTexture = string.lower(texture)
-                local searchIcon = string.lower(item.icon)
-                
-                if string.find(normTexture, searchIcon) then
-                    local count = GetPlayerBuffApplications(buffIndex)
-                    return true, count
-                end
+            if string.find(normTexture, searchIcon) then
+                -- For stack counts in modern WoW, we need more return values
+                local _, _, count = UnitBuff("player", i)
+                return true, count or 0
             end
             i = i + 1
         end
@@ -251,7 +234,7 @@ local function UpdateConsumes()
             else
                 local k = 1
                 while true do
-                    local texture = UnitBuff("player", k)
+                    local texture = GetBuffTexture("player", k)
                     if not texture then break end
                     
                     -- Check texture match
@@ -371,14 +354,11 @@ local function CreateAlertFrame()
     f:SetClampedToScreen(true)
     
     -- Dragging
-    f:RegisterForDrag("LeftButton")
-    f:SetScript("OnDragStart", function()
-        if VanillaSimpleAurasDB.unlock then this:StartMoving() end
+    f:SetScript("OnDragStart", function(self)
+        if VanillaSimpleAurasDB.unlock then self:StartMoving() end
     end)
-    f:SetScript("OnDragStop", function()
-        this:StopMovingOrSizing()
-        -- Save position if we wanted (SetPoint calls) but 1.12 usually saves automatically if setup right, or we manually save.
-        -- For simplicity, we assume standard layout-cache. If not, we can add layout saving later.
+    f:SetScript("OnDragStop", function(self)
+        self:StopMovingOrSizing()
     end)
     
     -- Background for unlock mode
@@ -404,11 +384,11 @@ local function CreateConsumeFrame()
     f:SetClampedToScreen(true)
     
     f:RegisterForDrag("LeftButton")
-    f:SetScript("OnDragStart", function()
-        if VanillaSimpleAurasDB.unlock then this:StartMoving() end
+    f:SetScript("OnDragStart", function(self)
+        if VanillaSimpleAurasDB.unlock then self:StartMoving() end
     end)
-    f:SetScript("OnDragStop", function()
-        this:StopMovingOrSizing()
+    f:SetScript("OnDragStop", function(self)
+        self:StopMovingOrSizing()
     end)
     
     local bg = f:CreateTexture(nil, "BACKGROUND")
@@ -440,8 +420,8 @@ local function CreateOptionsFrame()
     f:EnableMouse(true)
     f:SetMovable(true)
     f:RegisterForDrag("LeftButton")
-    f:SetScript("OnDragStart", function() this:StartMoving() end)
-    f:SetScript("OnDragStop", function() this:StopMovingOrSizing() end)
+    f:SetScript("OnDragStart", function(self) self:StartMoving() end)
+    f:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
     
     -- Title
     local title = f:CreateFontString(nil, "ARTWORK", "GameFontNormal")
@@ -484,13 +464,13 @@ local function CreateOptionsFrame()
     typeButton:SetPoint("LEFT", iconInput, "RIGHT", 20, 0)
     typeButton:SetText("SPELL")
     f.addType = "SPELL"
-    typeButton:SetScript("OnClick", function()
+    typeButton:SetScript("OnClick", function(self)
         if f.addType == "SPELL" then
             f.addType = "BUFF"
-            this:SetText("BUFF")
+            self:SetText("BUFF")
         else
             f.addType = "SPELL"
-            this:SetText("SPELL")
+            self:SetText("SPELL")
         end
     end)
     
@@ -560,8 +540,8 @@ local function CreateOptionsFrame()
         del:SetHeight(20)
         del:SetPoint("RIGHT", row, "RIGHT", 0, 0)
         del:SetText("X")
-        del:SetScript("OnClick", function()
-            local idx = row.index
+        del:SetScript("OnClick", function(self)
+            local idx = self:GetParent().index
             if idx and VanillaSimpleAurasDB.items[idx] then
                 table.remove(VanillaSimpleAurasDB.items, idx)
                 VSA_UpdateOptionsList()
@@ -580,13 +560,13 @@ local function CreateOptionsFrame()
     slider:SetMinMaxValues(0.1, 2.0)
     slider:SetValueStep(0.1)
     slider:SetValue(VanillaSimpleAurasDB.updateInterval or 0.2)
-    getglobal(slider:GetName() .. "Text"):SetText("Update Speed: " .. (VanillaSimpleAurasDB.updateInterval or 0.2) .. "s")
-    getglobal(slider:GetName() .. "Low"):SetText("0.1")
-    getglobal(slider:GetName() .. "High"):SetText("2.0")
-    slider:SetScript("OnValueChanged", function()
-        local val = math.floor(this:GetValue() * 10 + 0.5) / 10 -- Round to 1 decimal
+    _G[slider:GetName() .. "Text"]:SetText("Update Speed: " .. (VanillaSimpleAurasDB.updateInterval or 0.2) .. "s")
+    _G[slider:GetName() .. "Low"]:SetText("0.1")
+    _G[slider:GetName() .. "High"]:SetText("2.0")
+    slider:SetScript("OnValueChanged", function(self)
+        local val = math.floor(self:GetValue() * 10 + 0.5) / 10 -- Round to 1 decimal
         VanillaSimpleAurasDB.updateInterval = val
-        getglobal(this:GetName() .. "Text"):SetText("Update Speed: " .. val .. "s")
+        _G[self:GetName() .. "Text"]:SetText("Update Speed: " .. val .. "s")
     end)
     
     -- Unlock Button
@@ -595,9 +575,9 @@ local function CreateOptionsFrame()
     unlockBtn:SetHeight(25)
     unlockBtn:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 20, 20)
     unlockBtn:SetText(VanillaSimpleAurasDB.unlock and "Lock Frame" or "Unlock Frame")
-    unlockBtn:SetScript("OnClick", function()
+    unlockBtn:SetScript("OnClick", function(self)
         VanillaSimpleAurasDB.unlock = not VanillaSimpleAurasDB.unlock
-        this:SetText(VanillaSimpleAurasDB.unlock and "Lock Frame" or "Unlock Frame")
+        self:SetText(VanillaSimpleAurasDB.unlock and "Lock Frame" or "Unlock Frame")
         if VanillaSimpleAurasDB.unlock then
             VSA_AlertFrame.bg:Show()
             VSA_AlertFrame:Show()
@@ -639,7 +619,7 @@ function VSA_UpdateOptionsList()
     if not VSA_OptionsFrame then return end
     
     local items = VanillaSimpleAurasDB.items or {}
-    local numItems = table.getn(items)
+    local numItems = #items
     local NUM_ROWS = 8
     
     FauxScrollFrame_Update(VSA_OptionsFrame.scrollFrame, numItems, NUM_ROWS, 20)
@@ -688,22 +668,13 @@ local function VSA_RefreshConsumeList(category)
             cb:ClearAllPoints()
             cb:SetPoint("TOPLEFT", f.content, "TOPLEFT", 10, yVal)
             
-            cb.label = getglobal(cb:GetName().."Text")
+            cb.label = _G[cb:GetName().."Text"]
             cb.label:SetText(item.name)
             
             cb:SetChecked(VanillaSimpleAurasDB.consumes[item.key])
-            cb:SetScript("OnClick", function()
-                 VanillaSimpleAurasDB.consumes[item.key] = this:GetChecked() and true or nil
-                 UpdateConsumes()
-            end)
-            
-            -- Store item key for closure-like access if needed, but here we just used item.key in the script
-            -- Wait, Lua 5.0 loop variable closure issue? 
-            -- Yes, 'item' will be the last one if not careful in 5.0? No, 5.0 'for' loops are fresh scope per iteration? 
-            -- Actually in 5.0 it might be shared. Let's start safe.
             cb.itemKey = item.key
-            cb:SetScript("OnClick", function()
-                 VanillaSimpleAurasDB.consumes[this.itemKey] = this:GetChecked() and true or nil
+            cb:SetScript("OnClick", function(self)
+                 VanillaSimpleAurasDB.consumes[self.itemKey] = self:GetChecked() and true or nil
                  UpdateConsumes()
             end)
 
@@ -745,8 +716,8 @@ local function CreateConsumeOptionsFrame()
         btn:SetPoint("TOPLEFT", f, "TOPLEFT", 15, yVal)
         btn:SetText(cat)
         btn.category = cat -- Store on button to avoid closure issues
-        btn:SetScript("OnClick", function()
-            VSA_RefreshConsumeList(this.category)
+        btn:SetScript("OnClick", function(self)
+            VSA_RefreshConsumeList(self.category)
         end)
         f.catButtons[i] = btn
         yVal = yVal - 28
@@ -773,13 +744,13 @@ local function CreateConsumeOptionsFrame()
     slider:SetMinMaxValues(1, 20)
     slider:SetValueStep(1)
     slider:SetValue(VanillaSimpleAurasDB.consumeInterval or 5.0)
-    getglobal(slider:GetName() .. "Text"):SetText("Check Speed: " .. (VanillaSimpleAurasDB.consumeInterval or 5.0) .. "s")
-    getglobal(slider:GetName() .. "Low"):SetText("1s")
-    getglobal(slider:GetName() .. "High"):SetText("20s")
-    slider:SetScript("OnValueChanged", function()
-        local val = math.floor(this:GetValue() + 0.5) -- Round to integer
+    _G[slider:GetName() .. "Text"]:SetText("Check Speed: " .. (VanillaSimpleAurasDB.consumeInterval or 5.0) .. "s")
+    _G[slider:GetName() .. "Low"]:SetText("1s")
+    _G[slider:GetName() .. "High"]:SetText("20s")
+    slider:SetScript("OnValueChanged", function(self)
+        local val = math.floor(self:GetValue() + 0.5) -- Round to integer
         VanillaSimpleAurasDB.consumeInterval = val
-        getglobal(this:GetName() .. "Text"):SetText("Check Speed: " .. val .. "s")
+        _G[self:GetName() .. "Text"]:SetText("Check Speed: " .. val .. "s")
     end)
     
     return f
