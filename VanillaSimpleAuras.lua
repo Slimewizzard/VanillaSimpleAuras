@@ -11,6 +11,7 @@ local defaults = {
     consumes = {}, -- key -> bool
     updateInterval = 0.2,
     consumeInterval = 5.0,
+    warningThreshold = 120,
     items = {},
     minimapPos = 45,
     showMinimapButton = true
@@ -190,7 +191,8 @@ local function CheckCondition(item)
                 
                 if string.find(normTexture, searchIcon) then
                     local count = GetPlayerBuffApplications(buffIndex)
-                    return true, count
+                    local timeLeft = GetPlayerBuffTimeLeft(buffIndex)
+                    return true, count, timeLeft
                 end
             end
             i = i + 1
@@ -216,6 +218,13 @@ local function CreateIconFrame(parent)
     cd:SetPoint("CENTER", f, "CENTER", 0, 0)
     f.text = cd
     
+    local cross = f:CreateTexture(nil, "OVERLAY")
+    cross:SetAllPoints(f)
+    cross:SetTexture("Interface\\Buttons\\UI-GroupLoot-Pass-Up")
+    cross:SetAlpha(0.4)
+    cross:Hide()
+    f.cross = cross
+
     return f
 end
 
@@ -236,32 +245,42 @@ local function UpdateConsumes()
         if VanillaSimpleAurasDB.consumes[item.key] then
             -- Logic: Check if player has buff. If NOT, show icon.
             local found = false
+            local timeLeft = 0
             
             if item.isWeaponEnchant then
-                local hasMainHandEnchant, mainHandExpiration, mainHandCharges, hasOffHandEnchant, offHandExpiration, offHandCharges = GetWeaponEnchantInfo()
+                local hasMainHandEnchant, mainHandExpiration, _, hasOffHandEnchant, offHandExpiration, _ = GetWeaponEnchantInfo()
                 
                 if item.slot == "mainhand" and hasMainHandEnchant then
                     found = true
+                    if mainHandExpiration then timeLeft = mainHandExpiration / 1000 end
                 elseif item.slot == "offhand" and hasOffHandEnchant then
                     found = true
+                    if offHandExpiration then timeLeft = offHandExpiration / 1000 end
                 end
                 
             else
-                local k = 1
+                local k = 0
                 while true do
-                    local texture = UnitBuff("player", k)
-                    if not texture then break end
+                    local buffIndex = GetPlayerBuff(k, "HELPFUL")
+                    if buffIndex == -1 then break end
                     
-                    -- Check texture match
-                    if string.find(string.lower(texture), string.lower(item.buff)) then
-                        found = true
-                        break
+                    local texture = GetPlayerBuffTexture(buffIndex)
+                    if texture then
+                         -- Check texture match
+                        if string.find(string.lower(texture), string.lower(item.buff)) then
+                            found = true
+                            timeLeft = GetPlayerBuffTimeLeft(buffIndex)
+                            break
+                        end
                     end
                     k = k + 1
                 end
             end
             
-            if not found then
+            local threshold = VanillaSimpleAurasDB.warningThreshold or 120
+            local isExpiring = found and (timeLeft <= threshold)
+            
+            if not found or isExpiring then
                 consumeCount = consumeCount + 1
                 local icon = activeConsumeIcons[consumeCount]
                 if not icon then
@@ -276,6 +295,16 @@ local function UpdateConsumes()
                 end
                 icon.texture:SetTexture(texPath)
                 
+                -- Show Cross if Expiring
+                if isExpiring then
+                    icon.cross:Show()
+                else
+                    icon.cross:Hide()
+                end
+                
+                -- Clear text for consumes (unless we want stacks later)
+                icon.text:SetText("")
+
                 icon:ClearAllPoints()
                 icon:SetPoint("LEFT", VSA_ConsumeFrame, "LEFT", (consumeCount - 1) * (iconSize + spacing), 0)
                 icon:Show()
@@ -309,7 +338,7 @@ local function UpdateDisplay()
     local spacing = 5
     
     for i, item in ipairs(VanillaSimpleAurasDB.items) do
-        local active, count = CheckCondition(item)
+        local active, count, timeLeft = CheckCondition(item)
         if active then
             activeCount = activeCount + 1
             
@@ -334,6 +363,9 @@ local function UpdateDisplay()
             else
                 icon.text:SetText("")
             end
+            
+            -- removed expiration warning for main list
+            icon.cross:Hide()
             
             -- Position
             icon:ClearAllPoints()
@@ -586,6 +618,37 @@ local function CreateOptionsFrame()
         VanillaSimpleAurasDB.updateInterval = val
         getglobal(this:GetName() .. "Text"):SetText("Update Speed: " .. val .. "s")
     end)
+    slider:SetScript("OnEnter", function()
+        GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+        GameTooltip:SetText("Update Interval", 1, 1, 1)
+        GameTooltip:AddLine("How often to check custom spells & buffs.\nLower = more responsive but higher CPU usage.", nil, nil, nil, 1)
+        GameTooltip:Show()
+    end)
+    slider:SetScript("OnLeave", function() GameTooltip:Hide() end)
+
+    -- Warning Threshold Slider
+    local warnSlider = CreateFrame("Slider", "VanillaSimpleAurasWarnSlider", f, "OptionsSliderTemplate")
+    warnSlider:SetWidth(180)
+    warnSlider:SetHeight(16)
+    warnSlider:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 160, 60)
+    warnSlider:SetMinMaxValues(0, 600)
+    warnSlider:SetValueStep(10)
+    warnSlider:SetValue(VanillaSimpleAurasDB.warningThreshold or 120)
+    getglobal(warnSlider:GetName() .. "Text"):SetText("Warning: " .. (VanillaSimpleAurasDB.warningThreshold or 120) .. "s")
+    getglobal(warnSlider:GetName() .. "Low"):SetText("0s")
+    getglobal(warnSlider:GetName() .. "High"):SetText("600s")
+    warnSlider:SetScript("OnValueChanged", function()
+        local val = math.floor(this:GetValue())
+        VanillaSimpleAurasDB.warningThreshold = val
+        getglobal(this:GetName() .. "Text"):SetText("Warning: " .. val .. "s")
+    end)
+    warnSlider:SetScript("OnEnter", function()
+        GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+        GameTooltip:SetText("Warning Threshold", 1, 1, 1)
+        GameTooltip:AddLine("Time remaining (in seconds) to show the red 'X' warning on buffs.", nil, nil, nil, 1)
+        GameTooltip:Show()
+    end)
+    warnSlider:SetScript("OnLeave", function() GameTooltip:Hide() end)
     
     -- Unlock Button
     local unlockBtn = CreateFrame("Button", "VanillaSimpleAurasUnlockBtn", f, "UIPanelButtonTemplate")
@@ -786,6 +849,13 @@ local function CreateConsumeOptionsFrame()
         VanillaSimpleAurasDB.consumeInterval = val
         getglobal(this:GetName() .. "Text"):SetText("Check Speed: " .. val .. "s")
     end)
+    slider:SetScript("OnEnter", function()
+        GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+        GameTooltip:SetText("Consume Check Interval", 1, 1, 1)
+        GameTooltip:AddLine("How often to check if you are missing consumables.\nHigher = less CPU usage.", nil, nil, nil, 1)
+        GameTooltip:Show()
+    end)
+    slider:SetScript("OnLeave", function() GameTooltip:Hide() end)
     
     return f
 end
