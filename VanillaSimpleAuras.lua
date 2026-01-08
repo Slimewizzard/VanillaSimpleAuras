@@ -205,8 +205,31 @@ end
 --------------------------------------------------------------------------------
 -- Display / UI
 --------------------------------------------------------------------------------
+local function VSA_UseItem(itemName, slotType)
+    local cleanName = itemName
+    -- Strip suffixes we added for UI
+    cleanName = string.gsub(cleanName, " %(Main%)", "")
+    cleanName = string.gsub(cleanName, " %(Off%)", "")
+    
+    for bag = 0, 4 do
+        for slot = 1, GetContainerNumSlots(bag) do
+            local link = GetContainerItemLink(bag, slot)
+            if link then
+                if string.find(link, cleanName) then
+                    UseContainerItem(bag, slot)
+                    if slotType and SpellIsTargeting() then
+                         if slotType == "mainhand" then PickupInventoryItem(16) end
+                         if slotType == "offhand" then PickupInventoryItem(17) end
+                    end
+                    return
+                end
+            end
+        end
+    end
+end
+
 local function CreateIconFrame(parent)
-    local f = CreateFrame("Frame", nil, parent)
+    local f = CreateFrame("Button", nil, parent) -- Changed to Button for better click handling
     f:SetWidth(40)
     f:SetHeight(40)
     
@@ -224,6 +247,13 @@ local function CreateIconFrame(parent)
     cross:SetAlpha(0.4)
     cross:Hide()
     f.cross = cross
+
+    f:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+    f:SetScript("OnClick", function()
+         if this.itemData then
+            VSA_UseItem(this.itemData.name, this.itemData.slot)
+         end
+    end)
 
     return f
 end
@@ -302,17 +332,21 @@ local function UpdateConsumes()
                     icon.cross:Hide()
                 end
                 
+                -- Store item data for OnClick
+                icon.itemData = item
+                
                 -- Clear text for consumes (unless we want stacks later)
                 icon.text:SetText("")
 
                 icon:ClearAllPoints()
-                icon:SetPoint("LEFT", VSA_ConsumeFrame, "LEFT", (consumeCount - 1) * (iconSize + spacing), 0)
+                icon:SetPoint("LEFT", VSA_ConsumeFrame, "LEFT", 10 + (consumeCount - 1) * (iconSize + spacing), 0)
                 icon:Show()
             end
         end
     end
     if consumeCount > 0 then
-        VSA_ConsumeFrame:SetWidth(consumeCount * iconSize + (consumeCount - 1) * spacing)
+        VSA_ConsumeFrame:SetWidth(20 + consumeCount * iconSize + (consumeCount - 1) * spacing)
+        VSA_ConsumeFrame:SetHeight(iconSize + 20)
         VSA_ConsumeFrame:Show()
     else
         if VanillaSimpleAurasDB.unlock then
@@ -370,14 +404,15 @@ local function UpdateDisplay()
             -- Position
             icon:ClearAllPoints()
             -- Horizontal layout
-            icon:SetPoint("LEFT", VSA_AlertFrame, "LEFT", (activeCount - 1) * (iconSize + spacing), 0)
+            icon:SetPoint("LEFT", VSA_AlertFrame, "LEFT", 10 + (activeCount - 1) * (iconSize + spacing), 0)
             icon:Show()
         end
     end
     
     -- Resize container based on active count (optional, but good for centering if we wanted)
     if activeCount > 0 then
-        VSA_AlertFrame:SetWidth(activeCount * iconSize + (activeCount - 1) * spacing)
+        VSA_AlertFrame:SetWidth(20 + activeCount * iconSize + (activeCount - 1) * spacing)
+        VSA_AlertFrame:SetHeight(iconSize + 20)
         VSA_AlertFrame:Show()
     else
         -- Hide if nothing to show, UNLESS unlocked
@@ -403,7 +438,7 @@ local function CreateAlertFrame()
     -- Dragging
     f:RegisterForDrag("LeftButton")
     f:SetScript("OnDragStart", function()
-        if VanillaSimpleAurasDB.unlock then this:StartMoving() end
+        if VanillaSimpleAurasDB.unlock and IsShiftKeyDown() then this:StartMoving() end
     end)
     f:SetScript("OnDragStop", function()
         this:StopMovingOrSizing()
@@ -435,7 +470,7 @@ local function CreateConsumeFrame()
     
     f:RegisterForDrag("LeftButton")
     f:SetScript("OnDragStart", function()
-        if VanillaSimpleAurasDB.unlock then this:StartMoving() end
+        if VanillaSimpleAurasDB.unlock and IsShiftKeyDown() then this:StartMoving() end
     end)
     f:SetScript("OnDragStop", function()
         this:StopMovingOrSizing()
@@ -472,6 +507,9 @@ local function CreateOptionsFrame()
     f:RegisterForDrag("LeftButton")
     f:SetScript("OnDragStart", function() this:StartMoving() end)
     f:SetScript("OnDragStop", function() this:StopMovingOrSizing() end)
+    f:SetScript("OnHide", function() 
+        if VSA_ConsumeOptionsFrame then VSA_ConsumeOptionsFrame:Hide() end
+    end)
     
     -- Title
     local title = f:CreateFontString(nil, "ARTWORK", "GameFontNormal")
@@ -682,7 +720,7 @@ local function CreateOptionsFrame()
     local consumeBtn = CreateFrame("Button", "VanillaSimpleAurasConsumeBtn", f, "UIPanelButtonTemplate")
     consumeBtn:SetWidth(100)
     consumeBtn:SetHeight(25)
-    consumeBtn:SetPoint("RIGHT", f, "BOTTOMRIGHT", -20, 20)
+    consumeBtn:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -20, 20)
     consumeBtn:SetText("Consume List")
     consumeBtn:SetScript("OnClick", function()
         if VSA_ConsumeOptionsFrame:IsShown() then
