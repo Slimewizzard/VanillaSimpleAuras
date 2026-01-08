@@ -65,7 +65,7 @@ local VSA_PREDEFINED_CONSUMES = {
     { category = "Potions", key = "potion_zanza", name = "Spirit of Zanza", icon = "inv_potion_30", buff = "inv_potion_30" },
     { category = "Potions", key = "potion_scorpok", name = "Ground Scorpok Assay", icon = "inv_misc_dust_07", buff = "spell_nature_forceofnature" },
     { category = "Potions", key = "potion_roids", name = "R.O.I.D.S.", icon = "inv_stone_15", buff = "spell_nature_strength" },
-    { category = "Potions", key = "potion_cortex", name = "Cerebral Cortex Compound", icon = "inv_potion_119", buff = "spell_nature_purge" },
+    { category = "Potions", key = "potion_cortex", name = "Cerebral Cortex Compound", icon = "inv_potion_119", buff = "spell_ice_lament" },
     { category = "Potions", key = "potion_dreamtonic", name = "Dreamtonic", icon = "inv_potion_114", buff = "inv_potion_30" },
     { category = "Potions", key = "potion_quickness", name = "Potion of Quickness", icon = "inv_potion_08", buff = "spell_nature_invisibilty" },
     -- Note: Mighty Rage and Herbal Tea are instant, so tracking them as buffs usually doesn't work well unless they leave a specific buff.
