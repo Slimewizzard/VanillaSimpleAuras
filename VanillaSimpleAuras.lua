@@ -11,16 +11,102 @@ local defaults = {
     consumes = {}, -- key -> bool
     updateInterval = 0.2,
     consumeInterval = 5.0,
-    items = {
-        -- Example structure:
-        -- { type = "SPELL", name = "Holy Shock", icon = "Spell_Holy_SearingLight", enabled = true },
-        -- { type = "BUFF", name = "Judgement", icon = "Ability_Paladin_JudgementBlue", enabled = true },
-    }
+    warningThreshold = 120,
+    items = {},
+    minimapPos = 45,
+    showMinimapButton = true
 }
 
 local VSA_PREDEFINED_CONSUMES = {
-    { key = "food_salad", name = "Empowering Herbal Salad", icon = "inv_misc_food_salad", buff = "spell_nature_healingway" },
-    { key = "elixir_dreamshard", name = "Dreamshard Elixir", icon = "inv_potion_113", buff = "inv_potion_113" },
+    -- Food
+    { category = "Food", key = "food_dumplings", name = "Smoked Desert Dumplings", icon = "inv_misc_food_64", buff = "spell_misc_food" },
+    { category = "Food", key = "food_squid", name = "Grilled Squid", icon = "inv_misc_fish_13", buff = "inv_gauntlets_19" },
+    { category = "Food", key = "food_nightfin", name = "Nightfin Soup", icon = "inv_drink_17", buff = "spell_nature_manaregentotem" },
+    { category = "Food", key = "food_runntum", name = "Runn Tum Tuber Surprise", icon = "inv_misc_food_63", buff = "inv_misc_organ_03" },
+    { category = "Food", key = "food_dirges", name = "Dirge's Kickin' Chimaerok Chops", icon = "inv_misc_food_65", buff = "inv_boots_plate_03" },
+    { category = "Food", key = "food_mushroom_h", name = "Hardened Mushroom", icon = "inv_mushroom_15", buff = "inv_boots_plate_03" },
+    { category = "Food", key = "food_mushroom_p", name = "Power Mushroom", icon = "inv_mushroom_14", buff = "spell_misc_food" },
+    { category = "Food", key = "food_fishe", name = "Le Fishe Au Chocolat", icon = "inv_misc_fishe_au_chocolate", buff = "spell_misc_food" },
+    { category = "Food", key = "food_berry", name = "Sweet Mountain Berry", icon = "inv_misc_food_40", buff = "inv_boots_plate_03" },
+    { category = "Food", key = "food_telabim_medley", name = "Danonzo's Tel'Abim Medley", icon = "inv_misc_food_73", buff = "spell_misc_food" },
+    { category = "Food", key = "food_telabim_surprise", name = "Danonzo's Tel'Abim Surprise", icon = "inv_misc_food_92", buff = "spell_misc_food" },
+    { category = "Food", key = "food_telabim_delight", name = "Danonzo's Tel'Abim Delight", icon = "inv_drink_21", buff = "spell_misc_food" },
+    { category = "Food", key = "food_gumbo", name = "Gurubashi Gumbo", icon = "inv_misc_food_64", buff = "inv_misc_food_73" },
+    { category = "Food", key = "food_chili", name = "Dragonbreath Chili", icon = "inv_drink_23", buff = "spell_fire_incinerate" },
+    { category = "Food", key = "food_salad", name = "Empowering Herbal Salad", icon = "inv_misc_food_salad", buff = "spell_nature_healingway" },
+
+    -- Flasks
+    { category = "Flasks", key = "flask_titans", name = "Flask of the Titans", icon = "inv_potion_62", buff = "inv_potion_62" },
+    { category = "Flasks", key = "flask_supreme", name = "Flask of Supreme Power", icon = "inv_potion_41", buff = "inv_potion_41" },
+    { category = "Flasks", key = "flask_wisdom", name = "Flask of Distilled Wisdom", icon = "inv_potion_120", buff = "inv_potion_120" },
+
+    -- Elixirs
+    { category = "Elixirs", key = "elixir_mongoose", name = "Elixir of the Mongoose", icon = "inv_potion_32", buff = "inv_potion_32" },
+    { category = "Elixirs", key = "elixir_fortitude", name = "Elixir of Fortitude", icon = "inv_potion_43", buff = "inv_potion_44" },
+    { category = "Elixirs", key = "elixir_giants", name = "Elixir of Giants", icon = "inv_potion_61", buff = "inv_potion_61" },
+    { category = "Elixirs", key = "elixir_defense", name = "Elixir of Superior Defense", icon = "inv_potion_66", buff = "inv_potion_86" },
+    { category = "Elixirs", key = "elixir_shadow", name = "Elixir of Shadow Power", icon = "inv_potion_46", buff = "inv_potion_46" },
+    { category = "Elixirs", key = "elixir_firepower", name = "Elixir of Greater Firepower", icon = "inv_potion_60", buff = "inv_potion_60" },
+    { category = "Elixirs", key = "elixir_nature", name = "Elixir of Greater Nature Power", icon = "inv_potion_106", buff = "inv_potion_106" },
+    { category = "Elixirs", key = "elixir_frost", name = "Elixir of Frost Power", icon = "inv_potion_115", buff = "inv_potion_03" },
+    { category = "Elixirs", key = "elixir_intellect", name = "Elixir of Greater Intellect", icon = "inv_potion_124", buff = "inv_potion_10" },
+    { category = "Elixirs", key = "elixir_arcane", name = "Greater Arcane Elixir", icon = "inv_potion_25", buff = "inv_potion_25" },
+    { category = "Elixirs", key = "juju_might", name = "Juju Might", icon = "inv_misc_monsterscales_07", buff = "inv_misc_monsterscales_07" },
+    { category = "Elixirs", key = "juju_power", name = "Juju Power", icon = "inv_misc_monsterscales_11", buff = "inv_misc_monsterscales_11" },
+    { category = "Elixirs", key = "juju_flurry", name = "Juju Flurry", icon = "inv_misc_monsterscales_17", buff = "inv_misc_monsterscales_17" },
+    { category = "Elixirs", key = "elixir_dreamshard", name = "Dreamshard Elixir", icon = "inv_potion_113", buff = "inv_potion_113" },
+    { category = "Elixirs", key = "elixir_mongoose_c", name = "Concoction of the Emerald Mongoose", icon = "inv_blue_gold_elixir_2", buff = "inv_blue_gold_elixir_2" },
+    { category = "Elixirs", key = "elixir_dreamwater_c", name = "Concoction of the Dreamwater", icon = "inv_green_pink_elixir_1", buff = "inv_green_pink_elixir_1" },
+    { category = "Elixirs", key = "elixir_giant_c", name = "Concoction of the Arcane Giant", icon = "inv_yellow_purple_elixir_2", buff = "inv_yellow_purple_elixir_2" },
+
+    -- Potions (Special & Combat)
+    { category = "Potions", key = "potion_mageblood", name = "Mageblood Potion", icon = "inv_potion_45", buff = "inv_potion_45" },
+    { category = "Potions", key = "potion_arthas", name = "Gift of Arthas", icon = "inv_potion_28", buff = "spell_shadow_fingerofdeath" },
+    { category = "Potions", key = "potion_firewater", name = "Winterfall Firewater", icon = "inv_potion_92", buff = "inv_potion_92" },
+    { category = "Potions", key = "potion_zanza", name = "Spirit of Zanza", icon = "inv_potion_30", buff = "inv_potion_30" },
+    { category = "Potions", key = "potion_scorpok", name = "Ground Scorpok Assay", icon = "inv_misc_dust_07", buff = "spell_nature_forceofnature" },
+    { category = "Potions", key = "potion_roids", name = "R.O.I.D.S.", icon = "inv_stone_15", buff = "spell_nature_strength" },
+    { category = "Potions", key = "potion_cortex", name = "Cerebral Cortex Compound", icon = "inv_potion_119", buff = "spell_ice_lament" },
+    { category = "Potions", key = "potion_dreamtonic", name = "Dreamtonic", icon = "inv_potion_114", buff = "inv_potion_30" },
+    { category = "Potions", key = "potion_quickness", name = "Potion of Quickness", icon = "inv_potion_08", buff = "spell_nature_invisibilty" },
+    -- Note: Mighty Rage and Herbal Tea are instant, so tracking them as buffs usually doesn't work well unless they leave a specific buff.
+    
+    -- Weapons
+    { category = "Weapons", key = "weapon_dense_main", name = "Dense Sharpening Stone (Main)", icon = "inv_stone_sharpeningstone_05", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_dense_off", name = "Dense Sharpening Stone (Off)", icon = "inv_stone_sharpeningstone_05", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_ele_main", name = "Elemental Sharpe. Stone (Main)", icon = "inv_stone_02", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_ele_off", name = "Elemental Sharpe. Stone (Off)", icon = "inv_stone_02", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_mana_main", name = "Brilliant Mana Oil", icon = "inv_potion_100", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_wizard_main", name = "Brilliant Wizard Oil", icon = "inv_potion_105", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_blessed_main", name = "Blessed Weapon Coating (Main)", icon = "inv_potion_95", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_blessed_off", name = "Blessed Weapon Coating (Off)", icon = "inv_potion_95", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_shadow_main", name = "Shadowoil (Main)", icon = "inv_potion_106", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_shadow_off", name = "Shadowoil (Off)", icon = "inv_potion_106", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_deadly_main", name = "Deadly Poison (Main)", icon = "ability_rogue_dualweild", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_deadly_off", name = "Deadly Poison (Off)", icon = "ability_rogue_dualweild", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_instant_main", name = "Instant Poison (Main)", icon = "ability_poisons", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_instant_off", name = "Instant Poison (Off)", icon = "ability_poisons", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_consecrated_main", name = "Consecrated Stone (Main)", icon = "inv_stone_sharpeningstone_02", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_consecrated_off", name = "Consecrated Stone (Off)", icon = "inv_stone_sharpeningstone_02", isWeaponEnchant = true, slot = "offhand" },
+    { category = "Weapons", key = "weapon_bwizard_main", name = "Blessed Wizard Oil", icon = "inv_potion_138", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_frost_main", name = "Frost Oil (Main)", icon = "inv_potion_130", isWeaponEnchant = true, slot = "mainhand" },
+    { category = "Weapons", key = "weapon_frost_off", name = "Frost Oil (Off)", icon = "inv_potion_130", isWeaponEnchant = true, slot = "offhand" },
+
+    -- Misc (Class Buffs & Alcohol & Other)
+    { category = "Misc", key = "misc_fort", name = "Power Word: Fortitude", icon = "spell_holy_wordfortitude", buff = "spell_holy_wordfortitude" },
+    { category = "Misc", key = "misc_spirit", name = "Divine Spirit", icon = "spell_holy_divinespirit", buff = "spell_holy_divinespirit" },
+    { category = "Misc", key = "misc_int", name = "Arcane Intellect", icon = "spell_holy_magicalsentry", buff = "spell_holy_magicalsentry" },
+    { category = "Misc", key = "misc_motw", name = "Mark of the Wild", icon = "spell_nature_regeneration", buff = "spell_nature_regeneration" },
+    { category = "Misc", key = "misc_salv", name = "Blessing of Salvation", icon = "spell_holy_sealofsalvation", buff = "spell_holy_sealofsalvation" },
+    { category = "Misc", key = "misc_might", name = "Blessing of Might", icon = "spell_holy_fistofjustice", buff = "spell_holy_fistofjustice" },
+    { category = "Misc", key = "misc_wis", name = "Blessing of Wisdom", icon = "spell_holy_sealofwisdom", buff = "spell_holy_sealofwisdom" },
+    { category = "Misc", key = "misc_kings", name = "Blessing of Kings", icon = "spell_magic_magearmor", buff = "spell_magic_magearmor" },
+    { category = "Misc", key = "misc_light", name = "Blessing of Light", icon = "spell_holy_prayerofhealing02", buff = "spell_holy_prayerofhealing02" },
+    { category = "Misc", key = "misc_rumsey", name = "Rumsey Rum Black Label", icon = "inv_drink_04", buff = "inv_drink_04" },
+    { category = "Misc", key = "misc_merlot", name = "Medivh's Merlot", icon = "inv_drink_waterskin_05", buff = "inv_drink_04" },
+    { category = "Misc", key = "misc_merlot_blue", name = "Medivh's Merlot Blue", icon = "inv_drink_waterskin_01", buff = "inv_drink_19" },
+    { category = "Misc", key = "misc_runn", name = "Runn Tum Tuber", icon = "inv_misc_food_02", buff = "inv_misc_food_02" },
+    { category = "Misc", key = "misc_ony", name = "Onyxia Buff", icon = "inv_misc_head_dragon_01", buff = "inv_misc_head_dragon_01" },
 }
 
 local VSA_Frame = CreateFrame("Frame") -- Event handler frame
@@ -105,7 +191,8 @@ local function CheckCondition(item)
                 
                 if string.find(normTexture, searchIcon) then
                     local count = GetPlayerBuffApplications(buffIndex)
-                    return true, count
+                    local timeLeft = GetPlayerBuffTimeLeft(buffIndex)
+                    return true, count, timeLeft
                 end
             end
             i = i + 1
@@ -118,8 +205,31 @@ end
 --------------------------------------------------------------------------------
 -- Display / UI
 --------------------------------------------------------------------------------
+local function VSA_UseItem(itemName, slotType)
+    local cleanName = itemName
+    -- Strip suffixes we added for UI
+    cleanName = string.gsub(cleanName, " %(Main%)", "")
+    cleanName = string.gsub(cleanName, " %(Off%)", "")
+    
+    for bag = 0, 4 do
+        for slot = 1, GetContainerNumSlots(bag) do
+            local link = GetContainerItemLink(bag, slot)
+            if link then
+                if string.find(link, cleanName) then
+                    UseContainerItem(bag, slot)
+                    if slotType and SpellIsTargeting() then
+                         if slotType == "mainhand" then PickupInventoryItem(16) end
+                         if slotType == "offhand" then PickupInventoryItem(17) end
+                    end
+                    return
+                end
+            end
+        end
+    end
+end
+
 local function CreateIconFrame(parent)
-    local f = CreateFrame("Frame", nil, parent)
+    local f = CreateFrame("Button", nil, parent) -- Changed to Button for better click handling
     f:SetWidth(40)
     f:SetHeight(40)
     
@@ -131,6 +241,20 @@ local function CreateIconFrame(parent)
     cd:SetPoint("CENTER", f, "CENTER", 0, 0)
     f.text = cd
     
+    local cross = f:CreateTexture(nil, "OVERLAY")
+    cross:SetAllPoints(f)
+    cross:SetTexture("Interface\\Buttons\\UI-GroupLoot-Pass-Up")
+    cross:SetAlpha(0.4)
+    cross:Hide()
+    f.cross = cross
+
+    f:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+    f:SetScript("OnClick", function()
+         if this.itemData then
+            VSA_UseItem(this.itemData.name, this.itemData.slot)
+         end
+    end)
+
     return f
 end
 
@@ -151,20 +275,42 @@ local function UpdateConsumes()
         if VanillaSimpleAurasDB.consumes[item.key] then
             -- Logic: Check if player has buff. If NOT, show icon.
             local found = false
-            local k = 1
-            while true do
-                local texture = UnitBuff("player", k)
-                if not texture then break end
+            local timeLeft = 0
+            
+            if item.isWeaponEnchant then
+                local hasMainHandEnchant, mainHandExpiration, _, hasOffHandEnchant, offHandExpiration, _ = GetWeaponEnchantInfo()
                 
-                -- Check texture match
-                if string.find(string.lower(texture), string.lower(item.buff)) then
+                if item.slot == "mainhand" and hasMainHandEnchant then
                     found = true
-                    break
+                    if mainHandExpiration then timeLeft = mainHandExpiration / 1000 end
+                elseif item.slot == "offhand" and hasOffHandEnchant then
+                    found = true
+                    if offHandExpiration then timeLeft = offHandExpiration / 1000 end
                 end
-                k = k + 1
+                
+            else
+                local k = 0
+                while true do
+                    local buffIndex = GetPlayerBuff(k, "HELPFUL")
+                    if buffIndex == -1 then break end
+                    
+                    local texture = GetPlayerBuffTexture(buffIndex)
+                    if texture then
+                         -- Check texture match
+                        if string.find(string.lower(texture), string.lower(item.buff)) then
+                            found = true
+                            timeLeft = GetPlayerBuffTimeLeft(buffIndex)
+                            break
+                        end
+                    end
+                    k = k + 1
+                end
             end
             
-            if not found then
+            local threshold = VanillaSimpleAurasDB.warningThreshold or 120
+            local isExpiring = found and (timeLeft <= threshold)
+            
+            if not found or isExpiring then
                 consumeCount = consumeCount + 1
                 local icon = activeConsumeIcons[consumeCount]
                 if not icon then
@@ -179,14 +325,28 @@ local function UpdateConsumes()
                 end
                 icon.texture:SetTexture(texPath)
                 
+                -- Show Cross if Expiring
+                if isExpiring then
+                    icon.cross:Show()
+                else
+                    icon.cross:Hide()
+                end
+                
+                -- Store item data for OnClick
+                icon.itemData = item
+                
+                -- Clear text for consumes (unless we want stacks later)
+                icon.text:SetText("")
+
                 icon:ClearAllPoints()
-                icon:SetPoint("LEFT", VSA_ConsumeFrame, "LEFT", (consumeCount - 1) * (iconSize + spacing), 0)
+                icon:SetPoint("LEFT", VSA_ConsumeFrame, "LEFT", 10 + (consumeCount - 1) * (iconSize + spacing), 0)
                 icon:Show()
             end
         end
     end
     if consumeCount > 0 then
-        VSA_ConsumeFrame:SetWidth(consumeCount * iconSize + (consumeCount - 1) * spacing)
+        VSA_ConsumeFrame:SetWidth(20 + consumeCount * iconSize + (consumeCount - 1) * spacing)
+        VSA_ConsumeFrame:SetHeight(iconSize + 20)
         VSA_ConsumeFrame:Show()
     else
         if VanillaSimpleAurasDB.unlock then
@@ -212,7 +372,7 @@ local function UpdateDisplay()
     local spacing = 5
     
     for i, item in ipairs(VanillaSimpleAurasDB.items) do
-        local active, count = CheckCondition(item)
+        local active, count, timeLeft = CheckCondition(item)
         if active then
             activeCount = activeCount + 1
             
@@ -238,17 +398,21 @@ local function UpdateDisplay()
                 icon.text:SetText("")
             end
             
+            -- removed expiration warning for main list
+            icon.cross:Hide()
+            
             -- Position
             icon:ClearAllPoints()
             -- Horizontal layout
-            icon:SetPoint("LEFT", VSA_AlertFrame, "LEFT", (activeCount - 1) * (iconSize + spacing), 0)
+            icon:SetPoint("LEFT", VSA_AlertFrame, "LEFT", 10 + (activeCount - 1) * (iconSize + spacing), 0)
             icon:Show()
         end
     end
     
     -- Resize container based on active count (optional, but good for centering if we wanted)
     if activeCount > 0 then
-        VSA_AlertFrame:SetWidth(activeCount * iconSize + (activeCount - 1) * spacing)
+        VSA_AlertFrame:SetWidth(20 + activeCount * iconSize + (activeCount - 1) * spacing)
+        VSA_AlertFrame:SetHeight(iconSize + 20)
         VSA_AlertFrame:Show()
     else
         -- Hide if nothing to show, UNLESS unlocked
@@ -274,7 +438,7 @@ local function CreateAlertFrame()
     -- Dragging
     f:RegisterForDrag("LeftButton")
     f:SetScript("OnDragStart", function()
-        if VanillaSimpleAurasDB.unlock then this:StartMoving() end
+        if VanillaSimpleAurasDB.unlock and IsShiftKeyDown() then this:StartMoving() end
     end)
     f:SetScript("OnDragStop", function()
         this:StopMovingOrSizing()
@@ -306,7 +470,7 @@ local function CreateConsumeFrame()
     
     f:RegisterForDrag("LeftButton")
     f:SetScript("OnDragStart", function()
-        if VanillaSimpleAurasDB.unlock then this:StartMoving() end
+        if VanillaSimpleAurasDB.unlock and IsShiftKeyDown() then this:StartMoving() end
     end)
     f:SetScript("OnDragStop", function()
         this:StopMovingOrSizing()
@@ -343,6 +507,9 @@ local function CreateOptionsFrame()
     f:RegisterForDrag("LeftButton")
     f:SetScript("OnDragStart", function() this:StartMoving() end)
     f:SetScript("OnDragStop", function() this:StopMovingOrSizing() end)
+    f:SetScript("OnHide", function() 
+        if VSA_ConsumeOptionsFrame then VSA_ConsumeOptionsFrame:Hide() end
+    end)
     
     -- Title
     local title = f:CreateFontString(nil, "ARTWORK", "GameFontNormal")
@@ -489,6 +656,37 @@ local function CreateOptionsFrame()
         VanillaSimpleAurasDB.updateInterval = val
         getglobal(this:GetName() .. "Text"):SetText("Update Speed: " .. val .. "s")
     end)
+    slider:SetScript("OnEnter", function()
+        GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+        GameTooltip:SetText("Update Interval", 1, 1, 1)
+        GameTooltip:AddLine("How often to check custom spells & buffs.\nLower = more responsive but higher CPU usage.", nil, nil, nil, 1)
+        GameTooltip:Show()
+    end)
+    slider:SetScript("OnLeave", function() GameTooltip:Hide() end)
+
+    -- Warning Threshold Slider
+    local warnSlider = CreateFrame("Slider", "VanillaSimpleAurasWarnSlider", f, "OptionsSliderTemplate")
+    warnSlider:SetWidth(180)
+    warnSlider:SetHeight(16)
+    warnSlider:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 160, 60)
+    warnSlider:SetMinMaxValues(0, 600)
+    warnSlider:SetValueStep(10)
+    warnSlider:SetValue(VanillaSimpleAurasDB.warningThreshold or 120)
+    getglobal(warnSlider:GetName() .. "Text"):SetText("Warning: " .. (VanillaSimpleAurasDB.warningThreshold or 120) .. "s")
+    getglobal(warnSlider:GetName() .. "Low"):SetText("0s")
+    getglobal(warnSlider:GetName() .. "High"):SetText("600s")
+    warnSlider:SetScript("OnValueChanged", function()
+        local val = math.floor(this:GetValue())
+        VanillaSimpleAurasDB.warningThreshold = val
+        getglobal(this:GetName() .. "Text"):SetText("Warning: " .. val .. "s")
+    end)
+    warnSlider:SetScript("OnEnter", function()
+        GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+        GameTooltip:SetText("Warning Threshold", 1, 1, 1)
+        GameTooltip:AddLine("Time remaining (in seconds) to show the red 'X' warning on buffs.", nil, nil, nil, 1)
+        GameTooltip:Show()
+    end)
+    warnSlider:SetScript("OnLeave", function() GameTooltip:Hide() end)
     
     -- Unlock Button
     local unlockBtn = CreateFrame("Button", "VanillaSimpleAurasUnlockBtn", f, "UIPanelButtonTemplate")
@@ -522,7 +720,7 @@ local function CreateOptionsFrame()
     local consumeBtn = CreateFrame("Button", "VanillaSimpleAurasConsumeBtn", f, "UIPanelButtonTemplate")
     consumeBtn:SetWidth(100)
     consumeBtn:SetHeight(25)
-    consumeBtn:SetPoint("RIGHT", f, "BOTTOMRIGHT", -20, 20)
+    consumeBtn:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -20, 20)
     consumeBtn:SetText("Consume List")
     consumeBtn:SetScript("OnClick", function()
         if VSA_ConsumeOptionsFrame:IsShown() then
@@ -561,10 +759,58 @@ function VSA_UpdateOptionsList()
 end
 
 -- Side Window for Consumes
+local function VSA_RefreshConsumeList(category)
+    if not VSA_ConsumeOptionsFrame then return end
+    local f = VSA_ConsumeOptionsFrame
+    f.currentCategory = category
+    
+    -- Hide all existing checks
+    if f.checks then
+        for _, cb in pairs(f.checks) do cb:Hide() end
+    else
+        f.checks = {}
+    end
+    
+    -- Filter items
+    local yVal = -5
+    local count = 0
+    for i, item in ipairs(VSA_PREDEFINED_CONSUMES) do
+        if item.category == category then
+            count = count + 1
+            local cb = f.checks[count]
+            if not cb then
+                cb = CreateFrame("CheckButton", "VSA_ConsumeCheck"..count, f.scrollChild, "OptionsCheckButtonTemplate")
+                cb:SetWidth(24)
+                cb:SetHeight(24)
+                f.checks[count] = cb
+            end
+            
+            cb:ClearAllPoints()
+            cb:SetPoint("TOPLEFT", f.scrollChild, "TOPLEFT", 5, yVal)
+            
+            cb.label = getglobal(cb:GetName().."Text")
+            cb.label:SetText(item.name)
+            
+            cb:SetChecked(VanillaSimpleAurasDB.consumes[item.key])
+            cb.itemKey = item.key
+            cb:SetScript("OnClick", function()
+                 VanillaSimpleAurasDB.consumes[this.itemKey] = this:GetChecked() and true or nil
+                 UpdateConsumes()
+            end)
+
+            cb:Show()
+            yVal = yVal - 26
+        end
+    end
+    
+    -- Set ScrollChild height
+    f.scrollChild:SetHeight(math.abs(yVal) + 10)
+end
+
 local function CreateConsumeOptionsFrame()
     local f = CreateFrame("Frame", "VanillaSimpleAurasConsumeOptions", UIParent)
-    f:SetWidth(250)
-    f:SetHeight(300)
+    f:SetWidth(400) -- Wider for tabs
+    f:SetHeight(350)
     f:SetPoint("TOPLEFT", VSA_OptionsFrame, "TOPRIGHT", 0, 0)
     f:SetBackdrop({
         bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
@@ -572,39 +818,58 @@ local function CreateConsumeOptionsFrame()
         tile = true, tileSize = 32, edgeSize = 32,
         insets = { left = 11, right = 12, top = 12, bottom = 11 }
     })
-    f:Hide() -- Hide immediately
+    f:Hide()
     
     local title = f:CreateFontString(nil, "ARTWORK", "GameFontNormal")
     title:SetPoint("TOP", f, "TOP", 0, -20)
     title:SetText("Consume List")
     
-    -- Close
     local close = CreateFrame("Button", "VSA_ConsumeClose", f, "UIPanelCloseButton")
     close:SetPoint("TOPRIGHT", f, "TOPRIGHT", -5, -5)
     
-    -- List container
+    -- Category Buttons (Left side)
+    local categories = {"Elixirs", "Flasks", "Food", "Potions", "Weapons", "World", "Misc"}
     local yVal = -50
-    for i, item in ipairs(VSA_PREDEFINED_CONSUMES) do
-        local thisItem = item -- Capture for closure
-        local cb = CreateFrame("CheckButton", "VSA_ConsumeCheck"..i, f, "OptionsCheckButtonTemplate")
-        cb:SetWidth(24)
-        cb:SetHeight(24)
-        cb:SetPoint("TOPLEFT", f, "TOPLEFT", 20, yVal)
-        
-        cb.label = cb:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-        cb.label:SetPoint("LEFT", cb, "RIGHT", 5, 0)
-        cb.label:SetText(thisItem.name)
-        
-        -- Init
-        cb:SetChecked(VanillaSimpleAurasDB.consumes[thisItem.key])
-        
-        cb:SetScript("OnClick", function()
-             VanillaSimpleAurasDB.consumes[thisItem.key] = this:GetChecked() and true or nil
-             UpdateConsumes()
+    f.catButtons = {}
+    
+    for i, cat in ipairs(categories) do
+        local btn = CreateFrame("Button", "VSA_CatBtn"..i, f, "UIPanelButtonTemplate")
+        btn:SetWidth(80)
+        btn:SetHeight(24)
+        btn:SetPoint("TOPLEFT", f, "TOPLEFT", 15, yVal)
+        btn:SetText(cat)
+        btn.category = cat -- Store on button to avoid closure issues
+        btn:SetScript("OnClick", function()
+            VSA_RefreshConsumeList(this.category)
         end)
-        
-        yVal = yVal - 30
+        f.catButtons[i] = btn
+        yVal = yVal - 28
     end
+    
+    -- Content ScrollFrame (Right side)
+    local scrollFrame = CreateFrame("ScrollFrame", "VSA_ConsumeScrollFrame", f, "UIPanelScrollFrameTemplate")
+    scrollFrame:SetWidth(240)
+    scrollFrame:SetHeight(230)
+    scrollFrame:SetPoint("TOPLEFT", f, "TOPLEFT", 110, -60)
+    
+    local scrollChild = CreateFrame("Frame", "VSA_ConsumeScrollChild", scrollFrame)
+    scrollChild:SetWidth(230)
+    scrollChild:SetHeight(230)
+    scrollFrame:SetScrollChild(scrollChild)
+    
+    f.scrollFrame = scrollFrame
+    f.scrollChild = scrollChild
+    
+    -- BG for content
+    local contentBG = f:CreateTexture(nil, "BACKGROUND")
+    contentBG:SetPoint("TOPLEFT", scrollFrame, "TOPLEFT", -5, 5)
+    contentBG:SetPoint("BOTTOMRIGHT", scrollFrame, "BOTTOMRIGHT", 25, -5)
+    contentBG:SetTexture(0, 0, 0, 0.3)
+    
+    -- Default selection
+    f:SetScript("OnShow", function()
+        VSA_RefreshConsumeList("Elixirs")
+    end)
     
     -- Consume Interval Slider
     local slider = CreateFrame("Slider", "VanillaSimpleAurasConsumeSlider", f, "OptionsSliderTemplate")
@@ -622,8 +887,87 @@ local function CreateConsumeOptionsFrame()
         VanillaSimpleAurasDB.consumeInterval = val
         getglobal(this:GetName() .. "Text"):SetText("Check Speed: " .. val .. "s")
     end)
+    slider:SetScript("OnEnter", function()
+        GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+        GameTooltip:SetText("Consume Check Interval", 1, 1, 1)
+        GameTooltip:AddLine("How often to check if you are missing consumables.\nHigher = less CPU usage.", nil, nil, nil, 1)
+        GameTooltip:Show()
+    end)
+    slider:SetScript("OnLeave", function() GameTooltip:Hide() end)
     
     return f
+end
+
+--------------------------------------------------------------------------------
+-- Minimap Button
+--------------------------------------------------------------------------------
+local function VSA_UpdateMinimapButtonPos()
+    local angle = VanillaSimpleAurasDB.minimapPos or 45
+    local x = math.cos(math.rad(angle)) * 80
+    local y = math.sin(math.rad(angle)) * 80
+    VSA_MinimapButton:SetPoint("CENTER", Minimap, "CENTER", x, y)
+end
+
+local function CreateMinimapButton()
+    local f = CreateFrame("Button", "VSA_MinimapButton", Minimap)
+    f:SetWidth(31)
+    f:SetHeight(31)
+    f:SetFrameStrata("LOW")
+    f:SetToplevel(true)
+    f:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
+    
+    local icon = f:CreateTexture(nil, "BACKGROUND")
+    icon:SetWidth(20)
+    icon:SetHeight(20)
+    icon:SetPoint("CENTER", f, "CENTER", 0, 0)
+    icon:SetTexture("Interface\\AddOns\\VanillaSimpleAuras\\vsabig")
+    f.icon = icon
+    
+    local border = f:CreateTexture(nil, "OVERLAY")
+    border:SetWidth(53)
+    border:SetHeight(53)
+    border:SetPoint("TOPLEFT", f, "TOPLEFT", -1, 1)
+    border:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
+    
+    f:RegisterForClicks("LeftButtonUp")
+    f:SetScript("OnClick", function()
+        SlashCmdList["VANILLASIMPLEAURAS"]("")
+    end)
+    
+    f:SetScript("OnEnter", function()
+        GameTooltip:SetOwner(this, "ANCHOR_LEFT")
+        GameTooltip:SetText("VanillaSimpleAuras")
+        GameTooltip:AddLine("Left-click to open options.", 1, 1, 1)
+        GameTooltip:AddLine("Drag to move.", 1, 1, 1)
+        GameTooltip:Show()
+    end)
+    f:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
+    
+    f:RegisterForDrag("LeftButton")
+    f:SetScript("OnDragStart", function()
+        this:SetScript("OnUpdate", function()
+            local cx, cy = GetCursorPosition()
+            local mx, my = Minimap:GetCenter()
+            local scale = Minimap:GetEffectiveScale()
+            local x = cx / scale - mx
+            local y = cy / scale - my
+            local angle = math.deg(math.atan2(y, x))
+            VanillaSimpleAurasDB.minimapPos = angle
+            VSA_UpdateMinimapButtonPos()
+        end)
+    end)
+    f:SetScript("OnDragStop", function()
+        this:SetScript("OnUpdate", nil)
+    end)
+    
+    VSA_UpdateMinimapButtonPos()
+    if VanillaSimpleAurasDB.showMinimapButton then
+        f:Show()
+    else
+        f:Hide()
+    end
 end
 
 local function VSA_Initialize()
@@ -636,6 +980,7 @@ local function VSA_Initialize()
     VSA_ConsumeFrame = CreateConsumeFrame()
     VSA_OptionsFrame = CreateOptionsFrame()
     VSA_ConsumeOptionsFrame = CreateConsumeOptionsFrame()
+    CreateMinimapButton()
     
     -- Start loop
     VSA_Frame:SetScript("OnUpdate", function()
